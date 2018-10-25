@@ -8,6 +8,7 @@ public class Player : MovingObject {
     public int pointsPerFood = 10;
     public int pointsPerSoda = 20;
     public float restartLevelDelay = 1f;
+    public bool hasKey = false;
 
     private Animator animator;
     private int food;
@@ -57,7 +58,7 @@ public class Player : MovingObject {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Exit") {
+        if (other.tag == "Exit" && hasKey == true) {
             Invoke("Restart", restartLevelDelay);
             enabled = false;
         }
@@ -67,6 +68,11 @@ public class Player : MovingObject {
         }
         else if (other.tag == "Soda") {
             food += pointsPerSoda;
+            other.gameObject.SetActive(false);
+        }
+        else if(other.tag == "Key")
+        {
+            hasKey = true;
             other.gameObject.SetActive(false);
         }
     }
