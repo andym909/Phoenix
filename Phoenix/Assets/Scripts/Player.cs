@@ -39,8 +39,25 @@ public class Player : MovingObject {
         horizontal = (int)Input.GetAxisRaw("Horizontal");
         vertical = (int)Input.GetAxisRaw("Vertical");
 
-        if (horizontal != 0)
-            vertical = 0;
+		if(horizontal != 0) {
+			vertical = 0;
+
+			if(horizontal > 0) {
+				animator.SetInteger("Movement", 1);
+			}
+			else {
+				animator.SetInteger("Movement", 3);
+			}
+		}
+		else if(vertical > 0) {
+			animator.SetInteger("Movement", 0);
+		}
+		else if(vertical < 0) {
+			animator.SetInteger("Movement", 2);
+		}
+		else {
+			animator.SetInteger("Movement", -1);
+		}
 
         if (horizontal != 0 || vertical != 0)
             AttemptMove<Wall>(horizontal, vertical);
