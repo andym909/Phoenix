@@ -22,6 +22,7 @@ public class BoardManager : MonoBehaviour {
     public Count wallCount = new Count(5, 9);
     public Count foodCount = new Count(1, 5);
     public GameObject exit;
+    public GameObject key;
     public GameObject[] floorTiles;
     public GameObject[] wallTiles;
     public GameObject[] foodTiles;
@@ -82,6 +83,7 @@ public class BoardManager : MonoBehaviour {
         int enemyCount = (int)Mathf.Log(level, 2f);
         LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
         Instantiate(exit, new Vector3(columns - 1, rows - 1, 0f), Quaternion.identity);
+        Instantiate(key, RandomPosition(), Quaternion.identity);
     }
 
 }
