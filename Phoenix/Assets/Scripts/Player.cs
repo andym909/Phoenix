@@ -8,7 +8,7 @@ public class Player : MovingObject {
     public int pointsPerFood = 10;
     public int pointsPerSoda = 20;
     public float restartLevelDelay = 1f;
-    public bool hasKey = false;
+    bool hasKey = false;
 
     private Animator animator;
     private int food;
@@ -74,6 +74,7 @@ public class Player : MovingObject {
         {
             hasKey = true;
             other.gameObject.SetActive(false);
+			GameObject.FindGameObjectWithTag("Exit").GetComponent<Animator>().SetTrigger("OpenDoor");
         }
     }
 
