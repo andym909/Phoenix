@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class MovingObject : MonoBehaviour {
 
-    public float moveTime = 0.1f;
+    public float moveTime = 10f;
     public LayerMask blockingLayer;
 
 
@@ -29,7 +29,6 @@ public abstract class MovingObject : MonoBehaviour {
         boxCollider.enabled = true;
 
         if(hit.transform == null) {
-            StartCoroutine(SmoothMovement(end));
             return true;
         }
 
@@ -40,8 +39,11 @@ public abstract class MovingObject : MonoBehaviour {
         RaycastHit2D hit;
         bool canMove = Move(xDir, yDir, out hit);
 
-        if (hit.transform == null)
-            return;
+		if(hit.transform == null) {
+			Vector3 movement = new Vector3(xDir, yDir, 0f) * Time.deltaTime * moveTime;
+			transform.Translate(movement);
+			return;
+		}
 
         T hitComponent = hit.transform.GetComponent<T>();
 
@@ -59,6 +61,10 @@ public abstract class MovingObject : MonoBehaviour {
             yield return null;
         }
     }
+
+	public void StopMotion() {
+		StopCoroutine(SmoothMovement(Vector3.one));
+	}
 	
 	protected abstract void OnCantMove<T>(T component)
         where T : Component;

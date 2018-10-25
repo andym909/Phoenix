@@ -59,8 +59,11 @@ public class Player : MovingObject {
 			animator.SetInteger("Movement", -1);
 		}
 
-        if (horizontal != 0 || vertical != 0)
-            AttemptMove<Wall>(horizontal, vertical);
+		if(horizontal != 0 || vertical != 0)
+			AttemptMove<Wall>(horizontal, vertical);
+		else {
+			StopMotion();
+		}
 	}
 
     protected override void AttemptMove<T>(int xDir, int yDir) {
