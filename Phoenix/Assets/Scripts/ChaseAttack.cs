@@ -5,7 +5,6 @@ using UnityEngine;
 public class ChaseAttack : MonoBehaviour {
 
     public GameObject player;
-    Transform target;
     public float speed = 2f;
     private float minDistance = 1f;
     private float range;
@@ -21,7 +20,6 @@ public class ChaseAttack : MonoBehaviour {
         range = Vector2.Distance(transform.position, player.transform.position);
         if (range > minDistance)
         {
-            Debug.Log(range);
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
 	}
