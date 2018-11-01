@@ -6,6 +6,7 @@ public abstract class MovingObject : MonoBehaviour {
 
     public float moveTime = 10f;
     public LayerMask blockingLayer;
+	public float hitDistance;
 
 
     private BoxCollider2D boxCollider;
@@ -22,7 +23,7 @@ public abstract class MovingObject : MonoBehaviour {
 
     protected bool Move(int xDir, int yDir, out RaycastHit2D hit) {
         Vector2 start = transform.position;
-        Vector2 end = start + new Vector2(xDir, yDir);
+		Vector2 end = start + new Vector2(xDir * hitDistance, yDir * hitDistance);
 
         boxCollider.enabled = false;
         hit = Physics2D.Linecast(start, end, blockingLayer);
