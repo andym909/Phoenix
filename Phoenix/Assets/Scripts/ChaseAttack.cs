@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChaseAttack : MonoBehaviour {
 
     public GameObject player;
-    public Transform target;
+    Transform target;
     public float speed = 2f;
     private float minDistance = 1f;
     private float range;
