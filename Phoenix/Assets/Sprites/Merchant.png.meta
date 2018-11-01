@@ -57,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -92,6 +92,39 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -99,10 +132,10 @@ TextureImporter:
       name: Merchant_0
       rect:
         serializedVersion: 2
-        x: 5
+        x: 0
         y: 96
-        width: 21
-        height: 13
+        width: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -110,7 +143,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3127426017cb5e64cb84ac5a196abb11
+      spriteID: c7e88688d73e86045805d271f8a593df
       vertices: []
       indices: 
       edges: []
@@ -119,10 +152,10 @@ TextureImporter:
       name: Merchant_1
       rect:
         serializedVersion: 2
-        x: 37
+        x: 32
         y: 96
-        width: 21
-        height: 13
+        width: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,7 +163,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d04c51f501c2b914083be60ec1796dcc
+      spriteID: 79138397948ebbe4ea11acb587a22140
       vertices: []
       indices: 
       edges: []
@@ -139,10 +172,10 @@ TextureImporter:
       name: Merchant_2
       rect:
         serializedVersion: 2
-        x: 69
+        x: 64
         y: 96
-        width: 21
-        height: 13
+        width: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,7 +183,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65bcdb9b7ce50ba4084a05d80c0bd4ba
+      spriteID: 690098447838ebe4092afeac47c99575
       vertices: []
       indices: 
       edges: []
@@ -159,10 +192,10 @@ TextureImporter:
       name: Merchant_3
       rect:
         serializedVersion: 2
-        x: 101
+        x: 96
         y: 96
-        width: 21
-        height: 13
+        width: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -170,7 +203,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dd68871af7673c4c9bfcc2a16872c34
+      spriteID: 8ea7fdbd5602ba140a51a7d4030cfa5f
       vertices: []
       indices: 
       edges: []
@@ -179,10 +212,10 @@ TextureImporter:
       name: Merchant_4
       rect:
         serializedVersion: 2
-        x: 5
+        x: 0
         y: 48
-        width: 21
-        height: 13
+        width: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,7 +223,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd4991cc63c2e0642a9ac1a415f7c135
+      spriteID: a621099b1cab7ae469f455b4954d18c2
       vertices: []
       indices: 
       edges: []
@@ -199,10 +232,10 @@ TextureImporter:
       name: Merchant_5
       rect:
         serializedVersion: 2
-        x: 37
+        x: 32
         y: 48
-        width: 21
-        height: 13
+        width: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,7 +243,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 816b09d04310c8043921194dd386fefb
+      spriteID: 7e0f880a614a9a34097825380fab8801
       vertices: []
       indices: 
       edges: []
@@ -221,8 +254,8 @@ TextureImporter:
         serializedVersion: 2
         x: 64
         y: 48
-        width: 29
-        height: 31
+        width: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,7 +263,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63ff3348741f9cf48a2c7400c5a9b7ff
+      spriteID: 689ac4564a848d249b11247de21ac386
       vertices: []
       indices: 
       edges: []
@@ -242,7 +275,7 @@ TextureImporter:
         x: 96
         y: 48
         width: 32
-        height: 44
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,7 +283,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa0f620a86e748f49adf43617de2be0a
+      spriteID: e51ccd3ee4329c645ae9e03952e88a4f
       vertices: []
       indices: 
       edges: []
@@ -262,7 +295,7 @@ TextureImporter:
         x: 0
         y: 0
         width: 32
-        height: 44
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -270,7 +303,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1307b51bd4e33994f8dc2431096c18f7
+      spriteID: 6c0814766e829bc4c9c23bc523d0c081
       vertices: []
       indices: 
       edges: []
@@ -282,7 +315,7 @@ TextureImporter:
         x: 32
         y: 0
         width: 32
-        height: 44
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -290,7 +323,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9826fb8b7a5bd04fb9d3f72a90bcb48
+      spriteID: 8477837ab59f21847b09ae43ac26f20c
       vertices: []
       indices: 
       edges: []
@@ -302,7 +335,7 @@ TextureImporter:
         x: 64
         y: 0
         width: 32
-        height: 44
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -310,7 +343,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e255b46b6ec08c741aab8f1c4ed7a8af
+      spriteID: 751bd93106bf2a14487571ba50806af1
       vertices: []
       indices: 
       edges: []
@@ -322,7 +355,7 @@ TextureImporter:
         x: 96
         y: 0
         width: 32
-        height: 44
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -330,7 +363,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef34b15ecd8640e4e82c4851fe85c7ce
+      spriteID: 4761208f51aa77c44b22e4d3ddabdd72
       vertices: []
       indices: 
       edges: []
