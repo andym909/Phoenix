@@ -10,18 +10,19 @@ public class ChaseAttack : MonoBehaviour {
     private float minDistance = 1f;
     private float range;
 
-	// Use this for initialization
-	void Start () {
-        target = player.transform;
+
+    // Use this for initialization
+    void Awake () {
+        player = GameObject.Find("Player");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        range = Vector2.Distance(transform.position, target.position);
-        if(range > minDistance)
+        range = Vector2.Distance(transform.position, player.transform.position);
+        if (range > minDistance)
         {
             Debug.Log(range);
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
 	}
 }
