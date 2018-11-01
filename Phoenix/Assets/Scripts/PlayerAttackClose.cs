@@ -6,6 +6,7 @@ public class PlayerAttackClose : MonoBehaviour {
 
     private int damagePerAttack;
     private GameObject[] enemies;
+    private float attDistance = 1.5f;
 
 
 	void Start () {
@@ -48,24 +49,24 @@ public class PlayerAttackClose : MonoBehaviour {
     // check if enemy is above you
     private bool isUp(GameObject enemy) {
         return (enemy.transform.position.y > this.transform.position.y &&
-                enemy.transform.position.y < (this.transform.position.y + 1.0));
+                enemy.transform.position.y < (this.transform.position.y + attDistance));
     }
 
     // check if enemy is right of you 
     private bool isRight(GameObject enemy) {
         return (enemy.transform.position.x > this.transform.position.x &&
-                enemy.transform.position.x < (this.transform.position.x + 1.0));
+                enemy.transform.position.x < (this.transform.position.x + attDistance));
     }
 
     // check if enemy is left of you
     private bool isLeft(GameObject enemy) {
         return (enemy.transform.position.x < this.transform.position.x &&
-                enemy.transform.position.x > (this.transform.position.x - 1.0));
+                enemy.transform.position.x > (this.transform.position.x - attDistance));
     }
 
     // check if enemy is below you
     private bool isDown(GameObject enemy) {
         return (enemy.transform.position.y < this.transform.position.y &&
-                enemy.transform.position.y > (this.transform.position.y - 1.0));
+                enemy.transform.position.y > (this.transform.position.y - attDistance));
     }
 }
