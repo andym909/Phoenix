@@ -20,7 +20,7 @@ public class ChaseAttack : MonoBehaviour {
         range = Vector2.Distance(transform.position, player.transform.position);
         if (range > minDistance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+			transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
 	}
 }
