@@ -5,6 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour {
 
 	int health;
+	bool canBeDamaged = false;
 
 	public void SetHealth(int start) {
 		health = start;
@@ -19,10 +20,19 @@ public class Health : MonoBehaviour {
 	}
 
 	public void LoseHealth(int delta) {
-		health -= delta;
+		if(canBeDamaged)
+			health -= delta;
 	}
 
 	public bool IsAlive() {
 		return health > 0;
+	}
+
+	public bool CanBeDamaged() {
+		return canBeDamaged;
+	}
+
+	public void SetCanBeDamaged(bool canBeDamaged) {
+		this.canBeDamaged = canBeDamaged;
 	}
 }

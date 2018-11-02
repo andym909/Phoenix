@@ -15,7 +15,7 @@ public class ShootingAttack : MonoBehaviour {
 	}
 
 	void Update () {
-		if(timeElapsed >= timer) {
+		if(timeElapsed >= timer && player != null) {
 			GameObject tmp = (GameObject)Instantiate(projectile, transform.position, Quaternion.identity);
 			tmp.GetComponent<Arrow>().SetTarget(player.transform.position);
 			timeElapsed = 0f;

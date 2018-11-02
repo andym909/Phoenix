@@ -17,6 +17,8 @@ public class Player : MovingObject {
 
 	// Use this for initialization
 	protected override void Start () {
+		GetComponent<PlayerHealth>().SetCanBeDamaged(true);
+
         animator = GetComponent<Animator>();
 
         food = GameManager.instance.playerFoodPoints;
@@ -79,6 +81,7 @@ public class Player : MovingObject {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Exit" && hasKey == true) {
+			GetComponent<PlayerHealth>().SetCanBeDamaged(false);
             Invoke("Restart", restartLevelDelay);
             enabled = false;
         }
@@ -115,7 +118,7 @@ public class Player : MovingObject {
     }
 
     private void checkIfGameOver() {
-        if (food <= 0)
+		if (!GetComponent<PlayerHealth>().IsAlive())
             GameManager.instance.GameOver();
     }
 }
