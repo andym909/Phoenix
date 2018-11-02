@@ -74,7 +74,6 @@ namespace Completed
 		//Initializes the game for each level.
 		void InitGame()
 		{
-			GameObject.Find("Player").GetComponent<PlayerHealth>().SetCanBeDamaged(true);
 			//While doingSetup is true the player can't move, prevent player from moving while title card is up.
 			doingSetup = true;
 			
