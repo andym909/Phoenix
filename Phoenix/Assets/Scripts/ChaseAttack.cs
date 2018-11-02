@@ -27,7 +27,6 @@ public class ChaseAttack : MonoBehaviour {
 				transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
 			}
 			else if(timer >= attackTimer) {
-				print("Enemy Attacking");
 				player.GetComponent<PlayerHealth>().LoseHealth(1);
 				timer = 0f;
 			}
