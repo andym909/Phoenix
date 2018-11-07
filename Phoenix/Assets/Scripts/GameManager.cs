@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
 	}
 
     void InitGame() {
-        boardScript.SetupScene(level);
+        //boardScript.SetupScene(level);
     }
 
     public void GameOver() {
