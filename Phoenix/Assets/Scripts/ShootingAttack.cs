@@ -22,7 +22,9 @@ public class ShootingAttack : MonoBehaviour {
 		if(Vector3.Distance(player.transform.position, transform.position) < range) {	
 			anim.SetBool("isAttacking", true);
 			if(timeElapsed >= timer && player != null) {
-				GameObject tmp = (GameObject)Instantiate(projectile, transform.position, Quaternion.identity);
+				float atan = Mathf.Atan2(player.transform.position.y - transform.position.y, player.transform.position.x - transform.position.x);
+				Vector3 angle = new Vector3(0f, 0f, atan * (180f / Mathf.PI) + 140f); //WHO KNOWS WHY
+				GameObject tmp = (GameObject)Instantiate(projectile, transform.position, Quaternion.Euler(angle));
 				tmp.GetComponent<Arrow>().SetTarget(player.transform.position);
 				timeElapsed = 0f;
 			}
