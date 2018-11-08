@@ -20,7 +20,7 @@ public class Arrow : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other) {
 		if(other.gameObject.tag.Equals("Player")) {
-			other.gameObject.GetComponent<PlayerHealth>().LoseHealth(1);
+			other.gameObject.GetComponent<Health>().LoseHealth(1);
 			Destroy(gameObject);
 		}
 	}

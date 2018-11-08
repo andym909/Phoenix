@@ -45,7 +45,7 @@ public class ChaseAttack : MonoBehaviour {
 			}
 			else if(timer >= attackTimer) {
 				anim.SetTrigger("attack");
-				player.GetComponent<PlayerHealth>().LoseHealth(1);
+				player.GetComponent<Health>().LoseHealth(1);
 				timer = 0f;
 			}
 			else {
