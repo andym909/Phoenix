@@ -31,6 +31,11 @@ public class BoardCreator : MonoBehaviour
 
     private void Start()
     {
+        //SetupScene();
+    }
+
+    public void SetupScene()
+    {
         // Create the board holder.
         boardHolder = new GameObject("BoardHolder");
 
@@ -44,7 +49,6 @@ public class BoardCreator : MonoBehaviour
         InstantiateTiles();
         InstantiateOuterWalls();
     }
-
 
     void SetupTilesArray()
     {

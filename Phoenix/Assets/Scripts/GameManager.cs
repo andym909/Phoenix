@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
-    public BoardManager boardScript;
+    public BoardCreator boardScript;
     public int playerFoodPoints = 100;
     [HideInInspector] public bool playersTurn = true;
 
@@ -19,12 +19,12 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-        boardScript = GetComponent<BoardManager>();
+        boardScript = GetComponent<BoardCreator>();
         InitGame();
 	}
 
-    void InitGame() {
-        //boardScript.SetupScene(level);
+    public void InitGame() {
+        boardScript.SetupScene();
     }
 
     public void GameOver() {
