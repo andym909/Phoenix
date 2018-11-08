@@ -12,13 +12,13 @@ public class GameManager : MonoBehaviour {
     private int level = 3;
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
         if (instance == null)
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         boardScript = GetComponent<BoardCreator>();
         InitGame();
 	}

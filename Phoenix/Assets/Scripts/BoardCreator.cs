@@ -22,6 +22,7 @@ public class BoardCreator : MonoBehaviour
     public GameObject player;
     public GameObject exit;
     public GameObject key;
+    public int level;
 
     private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
     private Room[] rooms;                                     // All the rooms that are created for this board.
