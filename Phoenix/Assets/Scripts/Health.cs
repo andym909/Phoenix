@@ -32,9 +32,7 @@ public class Health : MonoBehaviour {
 	}
 
 	public void LoseHealth(int delta) {
-		print("Attempting Losing Health");
 		if(canBeDamaged)
-			print("Loss of health");
 			health -= delta;
 	}
 

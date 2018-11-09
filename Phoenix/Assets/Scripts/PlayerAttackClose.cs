@@ -16,7 +16,6 @@ public class PlayerAttackClose : MonoBehaviour {
             enemies = GameObject.FindGameObjectsWithTag("Enemy");   // array of enemies
             foreach (GameObject enemy in enemies) {
 				if(isInDirection(enemy, direction)) {
-					print("Hitting Enemy!");
 					enemy.GetComponent<Health>().LoseHealth(damagePerAttack);
 				}
             }
