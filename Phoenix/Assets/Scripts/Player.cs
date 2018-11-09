@@ -13,7 +13,8 @@ public class Player : MovingObject {
     private Animator animator;
     private int food;
 
-
+	float idleTime = 2f;
+	float idleTimer = 0f;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -42,28 +43,37 @@ public class Player : MovingObject {
         vertical = (int)Input.GetAxisRaw("Vertical");
 
 		if(horizontal != 0) {
+			animator.SetBool("movement", true);
 			vertical = 0;
 
 			if(horizontal > 0) {
-				animator.SetInteger("Movement", 1);
+				animator.SetInteger("facing", 1);
 			}
 			else {
-				animator.SetInteger("Movement", 3);
+				animator.SetInteger("facing", 3);
 			}
 		}
 		else if(vertical > 0) {
-			animator.SetInteger("Movement", 0);
+			animator.SetBool("movement", true);
+			animator.SetInteger("facing", 0);
 		}
 		else if(vertical < 0) {
-			animator.SetInteger("Movement", 2);
+			animator.SetBool("movement", true);
+			animator.SetInteger("facing", 2);
 		}
 		else {
-			animator.SetInteger("Movement", -1);
+			animator.SetBool("movement", false);
 		}
 
-		if(horizontal != 0 || vertical != 0)
+		if(horizontal != 0 || vertical != 0) {
+			idleTimer = 0f;
 			AttemptMove<Wall>(horizontal, vertical);
+		}
 		else {
+			idleTimer += Time.deltaTime;
+			if(idleTimer >= idleTime) {
+				animator.SetInteger("facing", 2);
+			}
 			StopMotion();
 		}
 	}

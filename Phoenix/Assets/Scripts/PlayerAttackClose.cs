@@ -12,7 +12,7 @@ public class PlayerAttackClose : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Space)) {
             // get the direction we're going
             // -1 idle, 0 up, 1 right, 2 down, 3 left
-            int direction = this.GetComponent<Animator>().GetInteger("Movement");
+            int direction = this.GetComponent<Animator>().GetInteger("facing");
             enemies = GameObject.FindGameObjectsWithTag("Enemy");   // array of enemies
             foreach (GameObject enemy in enemies) {
 				if(isInDirection(enemy, direction)) {
