@@ -5,7 +5,19 @@ using UnityEngine;
 public class Health : MonoBehaviour {
 
 	int health;
-	bool canBeDamaged = false;
+	public bool canBeDamaged = true;
+
+	public int startingHealth;
+
+	void Awake () {
+		SetHealth(startingHealth);
+	}
+
+	void Update () {
+		if(!IsAlive()) {
+			Destroy(gameObject);
+		}
+	}
 
 	public void SetHealth(int start) {
 		health = start;
