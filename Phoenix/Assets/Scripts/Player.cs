@@ -112,9 +112,9 @@ public class Player : MovingObject {
     }
 
     protected override void OnCantMove<T>(T component) {
-        Wall hitwall = component as Wall;
-        hitwall.Damagewall(wallDamage);
-        animator.SetTrigger("playerChop");
+        //Wall hitwall = component as Wall;
+        //hitwall.Damagewall(wallDamage);
+        //animator.SetTrigger("playerChop");
     }
 
     private void Restart() {
