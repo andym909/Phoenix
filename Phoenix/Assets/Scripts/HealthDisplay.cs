@@ -19,7 +19,7 @@ public class HealthDisplay : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-		playerHealth = GameObject.Find("Player").GetComponent<Health>();
+		playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
 		curHealth = playerHealth.GetHealth();
 		fires = new Image[curHealth / 2];
 		print(fires.Length);

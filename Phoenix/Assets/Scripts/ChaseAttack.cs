@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaseAttack : MonoBehaviour {
+public class ChaseAttack : MovingObject {
 
-    public GameObject player;
+    GameObject player;
     public float speed = 2f;
     private float minDistance = 1f;
     private float range;
@@ -16,7 +16,7 @@ public class ChaseAttack : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        player = GameObject.Find("Player");
+		player = GameObject.FindGameObjectWithTag("Player");
 		anim = GetComponent<Animator>();
 	}
 	
@@ -52,5 +52,11 @@ public class ChaseAttack : MonoBehaviour {
 				anim.SetInteger("movement", -1);
 			}
 		}
+	}
+
+	protected override void OnCantMove<T>(T component) {
+		//Wall hitwall = component as Wall;
+		//hitwall.Damagewall(wallDamage);
+		//animator.SetTrigger("playerChop");
 	}
 }
