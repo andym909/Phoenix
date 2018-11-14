@@ -14,7 +14,7 @@ public class ShootingAttack : MonoBehaviour {
 	Animator anim;
 
 	void Start() {
-		player = GameObject.Find("Player");
+		player = GameObject.FindGameObjectWithTag("Player");
 		anim = GetComponent<Animator>();
 	}
 
