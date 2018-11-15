@@ -14,6 +14,8 @@ public class ChaseAttack : MovingObject {
 
 	Animator anim;
 
+	bool canSee;
+
     // Use this for initialization
     void Awake () {
 		player = GameObject.FindGameObjectWithTag("Player");
@@ -24,7 +26,7 @@ public class ChaseAttack : MovingObject {
 	void Update () {
 		timer += Time.deltaTime;
 
-		if(player != null) {
+		if(canSee && player != null) {
 			range = Vector2.Distance(transform.position, player.transform.position);	
 			if(range > minDistance) {
 				float xDist = player.transform.position.x - transform.position.x;
@@ -52,6 +54,10 @@ public class ChaseAttack : MovingObject {
 				anim.SetInteger("movement", -1);
 			}
 		}
+	}
+
+	public void SetCanSee(bool b) {
+		canSee = b;
 	}
 
 	protected override void OnCantMove<T>(T component) {
