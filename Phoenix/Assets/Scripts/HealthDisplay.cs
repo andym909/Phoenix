@@ -22,7 +22,6 @@ public class HealthDisplay : MonoBehaviour {
 		playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
 		curHealth = playerHealth.GetHealth();
 		fires = new Image[curHealth / 2];
-		print(fires.Length);
 
 		for(int i = 0; i < fires.Length; i++) {
 			fires[i] = (Image)Instantiate(fireHealth, canvas.transform);
