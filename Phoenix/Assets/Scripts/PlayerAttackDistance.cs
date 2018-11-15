@@ -14,7 +14,7 @@ public class PlayerAttackDistance : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.LeftAlt)) {
+		if (Input.GetButtonDown("Fire1")) {
             // get the direction we're going
             // -1 idle, 0 up, 1 right, 2 down, 3 left
             int direction = this.GetComponent<Animator>().GetInteger("facing");

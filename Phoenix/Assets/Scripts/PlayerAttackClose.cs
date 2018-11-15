@@ -8,7 +8,7 @@ public class PlayerAttackClose : MonoBehaviour {
     public GameObject invisibleProjectile;
 	
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.Space)) {
+		if (Input.GetButtonDown("Jump")) {
             // get the direction we're going
             // -1 idle, 0 up, 1 right, 2 down, 3 left
             int direction = this.GetComponent<Animator>().GetInteger("facing");
