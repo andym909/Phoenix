@@ -5,6 +5,7 @@ using UnityEngine;
 public class Helper : MonoBehaviour {
 
     private Vector3 target;
+    private int damage = 1;
     float speed = 8f;
 
     public void SetTarget(Vector3 t) {
@@ -36,9 +37,9 @@ public class Helper : MonoBehaviour {
 	}
 
     private void OnCollisionEnter2D(Collision2D obj) {
+        //print(obj.gameObject.tag);
         if (obj.gameObject.tag.Equals("Enemy")) {
-            //obj.gameObject.GetComponent<EnemyHealth>().LoseHealth(1);
-            print("hit an enemy");
+            obj.gameObject.GetComponent<Health>().LoseHealth(damage);
         }
     }
 }

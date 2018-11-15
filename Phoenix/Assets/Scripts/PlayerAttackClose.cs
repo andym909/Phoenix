@@ -4,42 +4,39 @@ using UnityEngine;
 
 public class PlayerAttackClose : MonoBehaviour {
 
-    public int damagePerAttack = 2;
-    private GameObject[] enemies;
-    public float attDistance = 1.5f;
+    public float attDistance = 2.0f;
+    public GameObject invisibleProjectile;
 	
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Space)) {
-            print("attacking");
             // get the direction we're going
             // -1 idle, 0 up, 1 right, 2 down, 3 left
             int direction = this.GetComponent<Animator>().GetInteger("facing");
-            enemies = GameObject.FindGameObjectsWithTag("Enemy");   // array of enemies
-            foreach (GameObject enemy in enemies) {
-				if(isInDirection(enemy, direction)) {
-					enemy.GetComponent<Health>().LoseHealth(damagePerAttack);
-				}
-            }
+            GameObject tmp = (GameObject)Instantiate(invisibleProjectile, transform.position, Quaternion.identity);
+            tmp.GetComponent<CloseHelper>().SetTarget(getTarget(direction));
         }
 	}
 
-	private bool isInDirection(GameObject enemy, int dir) {
-		switch(dir) {
-			case -1:
-			case 2:
-				return (enemy.transform.position.y < this.transform.position.y &&
-					enemy.transform.position.y > (this.transform.position.y - attDistance));
-			case 3:
-				return (enemy.transform.position.x < this.transform.position.x &&
-					enemy.transform.position.x > (this.transform.position.x - attDistance));
-			case 0:
-				return (enemy.transform.position.y > this.transform.position.y &&
-					enemy.transform.position.y < (this.transform.position.y + attDistance));
-			case 1:
-				return (enemy.transform.position.x > this.transform.position.x &&
-					enemy.transform.position.x < (this.transform.position.x + attDistance));
-			default:
-				return false;
-		}
-	}
+    Vector3 getTarget(int dir) {
+        Vector3 ret = this.transform.position;
+        switch (dir) {
+            case -1:
+            case 2:
+                ret.y -= attDistance;
+                break;
+            case 0:
+                ret.y += attDistance;
+                break;
+            case 1:
+                ret.x += attDistance;
+                break;
+            case 3:
+                ret.x -= attDistance;
+                break;
+            default:
+                print("Problem with the movement state machine");
+                break;
+        }
+        return ret;
+    }
 }

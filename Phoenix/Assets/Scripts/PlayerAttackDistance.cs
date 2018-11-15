@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class PlayerAttackDistance : MonoBehaviour {
 
-    private int damagePerAttack;
     private float attackDistance = 10f;
 
     public GameObject projectile;
 
 	// Use this for initialization
 	void Start () {
-        damagePerAttack = 1;
 	}
 	
 	// Update is called once per frame
