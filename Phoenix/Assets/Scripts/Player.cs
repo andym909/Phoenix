@@ -36,11 +36,11 @@ public class Player : MovingObject {
         if (!GameManager.instance.playersTurn)
             return;
 
-        int horizontal = 0;
-        int vertical = 0;
+        float horizontal = 0;
+        float vertical = 0;
 
-        horizontal = (int)Input.GetAxisRaw("Horizontal");
-        vertical = (int)Input.GetAxisRaw("Vertical");
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
 
 		if(horizontal != 0) {
 			animator.SetBool("movement", true);
@@ -66,8 +66,24 @@ public class Player : MovingObject {
 		}
 
 		if(horizontal != 0 || vertical != 0) {
-			idleTimer = 0f;
-			AttemptMove<Wall>(horizontal, vertical);
+            if(horizontal != 0 && horizontal > 0)
+            {
+                horizontal += 1 - horizontal;
+            }
+            else if(horizontal != 0 && horizontal < 0)
+            {
+                horizontal += -1 - horizontal;
+            }
+            if (vertical != 0 && vertical > 0)
+            {
+                vertical += 1 - vertical;
+            }
+            else if (vertical != 0 && vertical < 0)
+            {
+                vertical += -1 - vertical;
+            }
+            idleTimer = 0f;
+			AttemptMove<Wall>((int)horizontal, (int)vertical);
 		}
 		else {
 			idleTimer += Time.deltaTime;
