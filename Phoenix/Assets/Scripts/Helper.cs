@@ -36,7 +36,6 @@ public class Helper : MonoBehaviour {
 	}
 
     private void OnCollisionEnter2D(Collision2D obj) {
-        print(obj);
         if (obj.gameObject.tag.Equals("Enemy")) {
             //obj.gameObject.GetComponent<EnemyHealth>().LoseHealth(1);
             print("hit an enemy");

@@ -19,7 +19,7 @@ public class PlayerAttackDistance : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.LeftAlt)) {
             // get the direction we're going
             // -1 idle, 0 up, 1 right, 2 down, 3 left
-            int direction = this.GetComponent<Animator>().GetInteger("Movement");
+            int direction = this.GetComponent<Animator>().GetInteger("facing");
             GameObject tmp = (GameObject)Instantiate(projectile, transform.position, Quaternion.identity);
             tmp.GetComponent<Helper>().SetTarget(getTarget(direction));
         }
