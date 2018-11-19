@@ -124,6 +124,7 @@ public class Player : MovingObject {
             hasKey = true;
             other.gameObject.SetActive(false);
 			GameObject.FindGameObjectWithTag("Exit").GetComponent<Animator>().SetTrigger("OpenDoor");
+			GameObject.FindGameObjectWithTag("HUD_Key").SetActive(true);
         }
     }
 
