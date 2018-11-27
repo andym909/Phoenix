@@ -149,4 +149,8 @@ public class Player : MovingObject {
 		if (!GetComponent<Health>().IsAlive())
             GameManager.instance.GameOver();
     }
+
+	public void ResetIdleTimer() {
+		idleTimer = 0f;
+	}
 }
