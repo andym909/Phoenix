@@ -12,7 +12,7 @@ public class BoardCreator : MonoBehaviour
 
     public int columns = 100;                                 // The number of columns on the board (how wide it will be).
     public int rows = 100;                                    // The number of rows on the board (how tall it will be).
-    public IntRange numRooms = new IntRange(15, 20);         // The range of the number of rooms there can be.
+    private IntRange numRooms = new IntRange(4+level, 5+level);         // The range of the number of rooms there can be.
     public IntRange roomWidth = new IntRange(3, 10);         // The range of widths rooms can have.
     public IntRange roomHeight = new IntRange(3, 10);        // The range of heights rooms can have.
     public IntRange corridorLength = new IntRange(6, 10);    // The range of lengths corridors between rooms can have.
@@ -24,7 +24,7 @@ public class BoardCreator : MonoBehaviour
     public GameObject key;
 	public GameObject enemy1;
 	public GameObject enemy2;
-    public int level;
+    public static int level = 1;
 
     private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
     private Room[] rooms;                                     // All the rooms that are created for this board.
@@ -71,7 +71,7 @@ public class BoardCreator : MonoBehaviour
     {
         // Create the rooms array with a random size.
         rooms = new Room[numRooms.Random];
-
+        print(rooms.Length);
         // There should be one less corridor than there is rooms.
         corridors = new Corridor[rooms.Length - 1];
 

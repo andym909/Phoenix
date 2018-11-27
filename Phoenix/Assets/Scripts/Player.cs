@@ -108,6 +108,7 @@ public class Player : MovingObject {
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Exit" && hasKey == true) {
 			GetComponent<Health>().SetCanBeDamaged(false);
+            GameManager.level++;
             Invoke("Restart", restartLevelDelay);
             enabled = false;
         }

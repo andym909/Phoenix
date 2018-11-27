@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     public int playerFoodPoints = 100;
     [HideInInspector] public bool playersTurn = true;
 
-    private int level = 3;
+    public static int level = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
 	}
 
     public void InitGame() {
+        BoardCreator.level = GameManager.level;
         boardScript.SetupScene();
     }
 
