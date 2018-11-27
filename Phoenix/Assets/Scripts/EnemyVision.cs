@@ -9,6 +9,8 @@ public class EnemyVision : MonoBehaviour {
 
 	ChaseAttack cAttack;
 	ShootingAttack sAttack;
+	[System.NonSerialized]
+	public bool agro = false;
 
 	void Start() {
 		player = GameObject.FindGameObjectWithTag("Player");
@@ -26,17 +28,22 @@ public class EnemyVision : MonoBehaviour {
 
 	void LookForPlayer() {
 		playerPos = player.transform.position;
-		RaycastHit2D[] hits = new RaycastHit2D[1];
+		RaycastHit2D[] hits = new RaycastHit2D[10];
 		GetComponent<Collider2D>().Raycast(new Vector2(playerPos.x - transform.position.x, playerPos.y - transform.position.y), hits);
-		if(hits[0].transform != null && hits[0].transform.tag.Equals("Player")) {
-			if(cAttack != null) {
-				cAttack.SetCanSee(true);
-			}
-			if(sAttack != null) {
-				sAttack.SetCanSee(true);
+		int index = agro ? 10 : 1;
+		bool seen = false;
+		for(int i = 0; i < index; i++) {
+			if(hits[i].transform != null && hits[i].transform.tag.Equals("Player")) {
+				seen = true;
+				if(cAttack != null) {
+					cAttack.SetCanSee(true);
+				}
+				if(sAttack != null) {
+					sAttack.SetCanSee(true);
+				}
 			}
 		}
-		else {
+		if(!seen) {
 			if(cAttack != null) {
 				cAttack.SetCanSee(false);
 			}

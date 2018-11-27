@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChaseAttack : MovingObject {
 
     GameObject player;
-    public float speed = 2f;
+    private float speed = 2f;
     private float minDistance = 1f;
     private float range;
 
@@ -15,11 +15,13 @@ public class ChaseAttack : MovingObject {
 	Animator anim;
 
 	bool canSee;
+	Vector3 ghostPlayer;
 
     // Use this for initialization
     void Awake () {
 		player = GameObject.FindGameObjectWithTag("Player");
 		anim = GetComponent<Animator>();
+		ghostPlayer = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -27,10 +29,22 @@ public class ChaseAttack : MovingObject {
 		timer += Time.deltaTime;
 
 		if(canSee && player != null) {
-			range = Vector2.Distance(transform.position, player.transform.position);	
+			GetComponent<EnemyVision>().agro = true;
+			ghostPlayer = player.transform.position;
+			if(Vector2.Distance(transform.position, player.transform.position) <= minDistance && timer >= attackTimer) {
+				anim.SetTrigger("attack");
+				player.GetComponent<Health>().LoseHealth(1);
+				timer = 0f;
+			}
+			else {
+				anim.SetInteger("movement", -1);
+			}
+		}
+		if(player != null) {
+			range = Vector2.Distance(transform.position, ghostPlayer);
 			if(range > minDistance) {
-				float xDist = player.transform.position.x - transform.position.x;
-				float yDist = player.transform.position.y - transform.position.y;
+				float xDist = ghostPlayer.x - transform.position.x;
+				float yDist = ghostPlayer.y - transform.position.y;
 				if(Mathf.Abs(xDist) > Mathf.Abs(yDist)) {
 					if(xDist < 0)
 						anim.SetInteger("movement", 3);
@@ -43,16 +57,20 @@ public class ChaseAttack : MovingObject {
 					else
 						anim.SetInteger("movement", 0);
 				}
-				transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+				transform.position = Vector2.MoveTowards(transform.position, ghostPlayer, speed * Time.deltaTime);
 			}
-			else if(timer >= attackTimer) {
-				anim.SetTrigger("attack");
-				player.GetComponent<Health>().LoseHealth(1);
-				timer = 0f;
-			}
-			else {
-				anim.SetInteger("movement", -1);
-			}
+		}
+	}
+
+	void OnCollisionEnter2D(Collision2D col) {
+		if(col.gameObject.tag == "Wall") {
+			speed = 1f;
+		}
+	}
+
+	void OnCollisionExit2D(Collision2D col) {
+		if(col.gameObject.tag == "Wall") {
+			speed = 2f;
 		}
 	}
 
