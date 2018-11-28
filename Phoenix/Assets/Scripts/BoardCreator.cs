@@ -24,6 +24,7 @@ public class BoardCreator : MonoBehaviour
     public GameObject key;
 	public GameObject enemy1;
 	public GameObject enemy2;
+    public GameObject feather;
     public static int level = 1;
 
     private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
@@ -130,12 +131,19 @@ public class BoardCreator : MonoBehaviour
                 exitPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
                 playerPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) && Random.value < 0.30) {
 				if(Random.value < 0.5) {
+                    //print(enemy1);
 					Instantiate(enemy1, new Vector3(rooms[i].xPos, rooms[i].yPos, 0), Quaternion.identity);
 				}
 				else {
+                    //print(enemy2);
 					Instantiate(enemy2, new Vector3(rooms[i].xPos, rooms[i].yPos, 0), Quaternion.identity);
 				}
 			}
+            else if(exitPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
+                playerPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
+                keyPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) && Random.value > 0.5) {
+                Instantiate(feather, new Vector3(rooms[i].xPos, rooms[i].yPos, 0), Quaternion.identity);
+            }
         }
 
     }

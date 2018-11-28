@@ -14,6 +14,7 @@ public class Player : MovingObject {
     private Animator animator;
 	private Image key;
     private int food;
+    private int feathers = 0;
 
 	float idleTime = 2f;
 	float idleTimer = 0f;
@@ -117,12 +118,8 @@ public class Player : MovingObject {
             Invoke("Restart", restartLevelDelay);
             enabled = false;
         }
-        else if (other.tag == "Food") {
-            food += pointsPerFood;
-            other.gameObject.SetActive(false);
-        }
-        else if (other.tag == "Soda") {
-            food += pointsPerSoda;
+        else if (other.tag == "Feather") {
+            feathers++;
             other.gameObject.SetActive(false);
         }
         else if(other.tag == "Key")
