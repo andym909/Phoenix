@@ -29,7 +29,14 @@ public class GameManager : MonoBehaviour {
     }
 
     public void GameOver() {
+        GameManager.level = 1;
+        Invoke("Restart", 1f);
         enabled = false;
+    }
+
+    public void Restart() {
+        print(GameManager.level);
+        Application.LoadLevel(Application.loadedLevel);
     }
 	
 	// Update is called once per frame

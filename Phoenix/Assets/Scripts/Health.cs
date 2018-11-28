@@ -15,7 +15,7 @@ public class Health : MonoBehaviour {
 
 	void Update () {
 		if(!IsAlive()) {
-			Destroy(gameObject);
+			enabled = false;
 		}
 	}
 

@@ -142,6 +142,7 @@ public class Player : MovingObject {
     }
 
     private void Restart() {
+        print(GameManager.level);
         Application.LoadLevel(Application.loadedLevel);
     }
 
@@ -152,8 +153,10 @@ public class Player : MovingObject {
     }
 
     private void checkIfGameOver() {
-		if (!GetComponent<Health>().IsAlive())
+        if (!GetComponent<Health>().IsAlive()) {
             GameManager.instance.GameOver();
+            enabled = false;
+        }
     }
 
 	public void ResetIdleTimer() {
