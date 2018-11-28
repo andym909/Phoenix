@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MovingObject {
 
@@ -11,6 +12,7 @@ public class Player : MovingObject {
     bool hasKey = false;
 
     private Animator animator;
+	private Image key;
     private int food;
 
 	float idleTime = 2f;
@@ -18,6 +20,9 @@ public class Player : MovingObject {
 
 	// Use this for initialization
 	protected override void Start () {
+		key = GameObject.Find("HUD_Key").GetComponent<Image>();
+		key.color = Color.black;
+
 		GetComponent<Health>().SetCanBeDamaged(true);
 
         animator = GetComponent<Animator>();
@@ -122,6 +127,7 @@ public class Player : MovingObject {
         }
         else if(other.tag == "Key")
         {
+			key.color = Color.white;
             hasKey = true;
             other.gameObject.SetActive(false);
 			GameObject.FindGameObjectWithTag("Exit").GetComponent<Animator>().SetTrigger("OpenDoor");
