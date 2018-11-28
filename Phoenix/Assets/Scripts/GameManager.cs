@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
     public BoardCreator boardScript;
     public int playerFoodPoints = 100;
-    [HideInInspector] public bool playersTurn = true;
 
     public static int level = 1;
 

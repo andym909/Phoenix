@@ -5,15 +5,11 @@ using UnityEngine.UI;
 
 public class Player : MovingObject {
 
-    public int wallDamage = 1;
-    public int pointsPerFood = 10;
-    public int pointsPerSoda = 20;
     public float restartLevelDelay = 1f;
     bool hasKey = false;
 
     private Animator animator;
 	private Image key;
-    private int food;
     private int feathers = 0;
 
 	float idleTime = 2f;
@@ -28,19 +24,11 @@ public class Player : MovingObject {
 
         animator = GetComponent<Animator>();
 
-        food = GameManager.instance.playerFoodPoints;
-
         base.Start();
 	}
 
-    private void OnDisable() {
-        GameManager.instance.playerFoodPoints = food;
-    }
-
     // Update is called once per frame
     void Update () {
-        if (!GameManager.instance.playersTurn)
-            return;
 
         float horizontal = 0;
         float vertical = 0;
@@ -101,14 +89,8 @@ public class Player : MovingObject {
 	}
 
     protected override void AttemptMove<T>(int xDir, int yDir) {
-        food--;
         base.AttemptMove<T>(xDir, yDir);
-
-        RaycastHit2D hit;
-
         checkIfGameOver();
-
-        GameManager.instance.playersTurn = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -128,25 +110,16 @@ public class Player : MovingObject {
             hasKey = true;
             other.gameObject.SetActive(false);
 			GameObject.FindGameObjectWithTag("Exit").GetComponent<Animator>().SetTrigger("OpenDoor");
-			GameObject.FindGameObjectWithTag("HUD_Key").SetActive(true);
         }
     }
 
     protected override void OnCantMove<T>(T component) {
-        //Wall hitwall = component as Wall;
-        //hitwall.Damagewall(wallDamage);
-        //animator.SetTrigger("playerChop");
+        
     }
 
     private void Restart() {
         print(GameManager.level);
         Application.LoadLevel(Application.loadedLevel);
-    }
-
-    public void loseFood(int loss) {
-        animator.SetTrigger("playerHit");
-        food -= loss;
-        checkIfGameOver();
     }
 
     private void checkIfGameOver() {
