@@ -72,7 +72,7 @@ public class BoardCreator : MonoBehaviour
     {
         // Create the rooms array with a random size.
         rooms = new Room[numRooms.Random];
-        print(rooms.Length);
+        //print(rooms.Length);
         // There should be one less corridor than there is rooms.
         corridors = new Corridor[rooms.Length - 1];
 
@@ -129,19 +129,19 @@ public class BoardCreator : MonoBehaviour
 
 			if (keyPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
                 exitPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
-                playerPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) && Random.value < 0.30) {
+                playerPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) && 
+                Random.value < 0.30) {
 				if(Random.value < 0.5) {
-                    //print(enemy1);
 					Instantiate(enemy1, new Vector3(rooms[i].xPos, rooms[i].yPos, 0), Quaternion.identity);
 				}
 				else {
-                    //print(enemy2);
 					Instantiate(enemy2, new Vector3(rooms[i].xPos, rooms[i].yPos, 0), Quaternion.identity);
 				}
 			}
             else if(exitPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
                 playerPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
-                keyPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) && Random.value > 0.5) {
+                keyPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) && 
+                Random.value > 0.5) {
                 Instantiate(feather, new Vector3(rooms[i].xPos, rooms[i].yPos, 0), Quaternion.identity);
             }
         }

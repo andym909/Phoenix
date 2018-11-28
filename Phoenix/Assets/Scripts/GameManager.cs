@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Restart() {
-        print(GameManager.level);
         Application.LoadLevel(Application.loadedLevel);
     }
 	
