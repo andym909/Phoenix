@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
     public BoardCreator boardScript;
     public int playerFoodPoints = 100;
-    [HideInInspector] public bool playersTurn = true;
 
     public static int level = 1;
 
@@ -29,7 +28,13 @@ public class GameManager : MonoBehaviour {
     }
 
     public void GameOver() {
+        GameManager.level = 1;
+        Invoke("Restart", 1f);
         enabled = false;
+    }
+
+    public void Restart() {
+        Application.LoadLevel(Application.loadedLevel);
     }
 	
 	// Update is called once per frame

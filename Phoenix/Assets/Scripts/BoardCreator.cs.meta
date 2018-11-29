@@ -3,7 +3,14 @@ guid: ea1e086e6164a974d8ddaf827a62cc86
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {instanceID: 0}
+  - exit: {instanceID: 0}
+  - key: {instanceID: 0}
+  - enemy1: {instanceID: 0}
+  - enemy2: {instanceID: 0}
+  - feather_Real: {fileID: 1178363415798434, guid: f6b9be9b329342c4db62ed363ada9710,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

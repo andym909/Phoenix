@@ -24,6 +24,7 @@ public class BoardCreator : MonoBehaviour
     public GameObject key;
 	public GameObject enemy1;
 	public GameObject enemy2;
+    public GameObject feather;
     public static int level = 1;
 
     private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
@@ -71,7 +72,7 @@ public class BoardCreator : MonoBehaviour
     {
         // Create the rooms array with a random size.
         rooms = new Room[numRooms.Random];
-        print(rooms.Length);
+        //print(rooms.Length);
         // There should be one less corridor than there is rooms.
         corridors = new Corridor[rooms.Length - 1];
 
@@ -84,7 +85,9 @@ public class BoardCreator : MonoBehaviour
 
         // Setup the first corridor using the first room.
         corridors[0].SetupCorridor(rooms[0], corridorLength, roomWidth, roomHeight, columns, rows, true);
-
+        Vector3 keyPos = new Vector3(-1, -1, 0);
+        Vector3 exitPos = new Vector3(-1, -1, 0);
+        Vector3 playerPos = new Vector3(-1, -1, 0);
         for (int i = 1; i < rooms.Length; i++)
         {
             // Create a room.
@@ -105,23 +108,29 @@ public class BoardCreator : MonoBehaviour
 
             if (i == 1)
             {
-                Vector3 playerPos = new Vector3(rooms[i].xPos, rooms[i].yPos, 0);
+                playerPos.x = rooms[i].xPos;
+                playerPos.y = rooms[i].yPos;
                 Instantiate(player, playerPos, Quaternion.identity);
             }
 
             if (i == rooms.Length *.5f || i == rooms.Length * .5f - .5f)
             {
-                Vector3 keyPos = new Vector3(rooms[i].xPos, rooms[i].yPos, 0);
+                keyPos.x = rooms[i].xPos;
+                keyPos.y = rooms[i].yPos;
                 Instantiate(key, keyPos, Quaternion.identity);
             }
 
             if (i == rooms.Length - 1)
             {
-                Vector3 exitPos = new Vector3(rooms[i].xPos, rooms[i].yPos, 0);
+                exitPos.x = rooms[i].xPos;
+                exitPos.y = rooms[i].yPos;
                 Instantiate(exit, exitPos, Quaternion.identity);
             }
 
-			if(Random.value < 0.30) {
+			if (keyPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
+                exitPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
+                playerPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) && 
+                Random.value < 0.30) {
 				if(Random.value < 0.5) {
 					Instantiate(enemy1, new Vector3(rooms[i].xPos, rooms[i].yPos, 0), Quaternion.identity);
 				}
@@ -129,6 +138,12 @@ public class BoardCreator : MonoBehaviour
 					Instantiate(enemy2, new Vector3(rooms[i].xPos, rooms[i].yPos, 0), Quaternion.identity);
 				}
 			}
+            else if(exitPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
+                playerPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
+                keyPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) && 
+                Random.value > 0.5) {
+                Instantiate(feather, new Vector3(rooms[i].xPos, rooms[i].yPos, 0), Quaternion.identity);
+            }
         }
 
     }
