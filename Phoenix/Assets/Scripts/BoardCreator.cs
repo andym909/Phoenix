@@ -52,6 +52,8 @@ public class BoardCreator : MonoBehaviour
 
         InstantiateTiles();
         InstantiateOuterWalls();
+
+		Camera.main.GetComponent<LoadingScreen>().FinishLoad();
     }
 
     void SetupTilesArray()
