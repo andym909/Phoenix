@@ -6,9 +6,11 @@ public class Arrow : MonoBehaviour {
 
 	Vector3 target;
 	float speed = 5f;
+    private int damage = 1;
 
-	public void SetTarget(Vector3 t) {
+	public void SetTarget(Vector3 t, int damage) {
 		target = t;
+        this.damage = damage;
 	}
 
 	void Update() {
@@ -20,7 +22,7 @@ public class Arrow : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other) {
 		if(other.gameObject.tag.Equals("Player")) {
-			other.gameObject.GetComponent<Health>().LoseHealth(1);
+			other.gameObject.GetComponent<Health>().LoseHealth(damage);
 			Destroy(gameObject);
 		}
 	}
