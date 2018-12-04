@@ -9,6 +9,7 @@ public class TitleScreen : MonoBehaviour {
 		PlayerPrefs.SetInt("MaxHealth", 10);
 		PlayerPrefs.SetInt("Health", 10);
 		PlayerPrefs.SetInt("Feathers", 0);
+		PlayerPrefs.SetInt("Start", 1);
 	}
 
 	void Update() {
