@@ -10,6 +10,7 @@ public class Player : MovingObject {
 
     private Animator animator;
 	private Image key;
+	private Text featherText;
     private int feathers = 0;
 
 	float idleTime = 2f;
@@ -17,6 +18,8 @@ public class Player : MovingObject {
 
 	// Use this for initialization
 	protected override void Start () {
+		featherText = GameObject.Find("Feather_Text").GetComponent<Text>();
+
 		key = GameObject.Find("HUD_Key").GetComponent<Image>();
 		key.color = Color.black;
 
@@ -101,7 +104,7 @@ public class Player : MovingObject {
             enabled = false;
         }
         else if (other.tag == "Feather") {
-            feathers++;
+			changeFeathers(1);
             other.gameObject.SetActive(false);
         }
         else if(other.tag == "Key")
@@ -131,5 +134,10 @@ public class Player : MovingObject {
 
 	public void ResetIdleTimer() {
 		idleTimer = 0f;
+	}
+
+	private void changeFeathers(int count) {
+		feathers++;
+		featherText.text = "x" + feathers.ToString();
 	}
 }
