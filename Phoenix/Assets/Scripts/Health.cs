@@ -10,7 +10,7 @@ public class Health : MonoBehaviour {
 	public int startingHealth;
 
 	void Awake () {
-		SetHealth(startingHealth);
+		SetHealth(PlayerPrefs.GetInt("Health"));
 	}
 
 	void Update () {

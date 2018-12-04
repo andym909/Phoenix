@@ -7,8 +7,8 @@ public class HealthDisplay : MonoBehaviour {
 
 	Health playerHealth;
 	Image[] fires;
-	int curHealth;
-	int maxHealth;
+	public int curHealth;
+	public int maxHealth;
 
 	public Sprite fullFire;
 	public Sprite halfFire;
@@ -23,7 +23,7 @@ public class HealthDisplay : MonoBehaviour {
 		GameObject p = GameObject.FindGameObjectWithTag("Player");
 		if(p != null) {
 			playerHealth = p.GetComponent<Health>();
-			maxHealth = playerHealth.GetHealth();
+			maxHealth = PlayerPrefs.GetInt("MaxHealth");
 			InitializeHealth();
 		}
 	}
@@ -40,7 +40,7 @@ public class HealthDisplay : MonoBehaviour {
 			GameObject p = GameObject.FindGameObjectWithTag("Player");
 			if(p != null) {
 				playerHealth = p.GetComponent<Health>();
-				maxHealth = playerHealth.GetHealth();
+				maxHealth = PlayerPrefs.GetInt("MaxHealth");
 				InitializeHealth();
 			}
 		}
