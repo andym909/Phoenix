@@ -124,6 +124,7 @@ public class Player : MovingObject {
         else if(other.tag == "Speed_PowerUp" && this.moveTime <= 18)
         {
             this.moveTime += 1;
+            other.gameObject.SetActive(false);
         }
         else if(other.tag == "Damage_PowerUp")
         {
@@ -131,6 +132,7 @@ public class Player : MovingObject {
             GetComponent<PlayerAttackClose>().GetComponent<CloseHelper>().SetDamage(cDC + 1);
             int cDP = GetComponent<PlayerAttackDistance>().GetComponent<Helper>().GetDamage();
             GetComponent<PlayerAttackDistance>().GetComponent<Helper>().SetDamage(cDP + 1);
+            other.gameObject.SetActive(false);
         }
     }
 
