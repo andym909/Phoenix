@@ -14,6 +14,7 @@ public class PlayerAttackClose : MonoBehaviour {
             int direction = this.GetComponent<Animator>().GetInteger("facing");
             GameObject tmp = (GameObject)Instantiate(invisibleProjectile, transform.position, Quaternion.identity);
             tmp.GetComponent<CloseHelper>().SetTarget(getTarget(direction));
+			GetComponent<Player>().ResetIdleTimer();
         }
 	}
 
