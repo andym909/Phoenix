@@ -36,8 +36,10 @@ public class Player : MovingObject {
         float horizontal = 0;
         float vertical = 0;
 
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
+		if(Camera.main.GetComponent<LoadingScreen>().loading == false) {
+			horizontal = Input.GetAxisRaw("Horizontal");
+			vertical = Input.GetAxisRaw("Vertical");
+		}
 
 		if(horizontal != 0) {
 			animator.SetBool("movement", true);
@@ -98,6 +100,7 @@ public class Player : MovingObject {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Exit" && hasKey == true) {
+			Camera.main.GetComponent<LoadingScreen>().LoadScreen();
 			GetComponent<Health>().SetCanBeDamaged(false);
             GameManager.level++;
             Invoke("Restart", restartLevelDelay);

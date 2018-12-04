@@ -8,6 +8,7 @@ public class HealthDisplay : MonoBehaviour {
 	Health playerHealth;
 	Image[] fires;
 	int curHealth;
+	int maxHealth;
 
 	public Sprite fullFire;
 	public Sprite halfFire;
@@ -22,14 +23,8 @@ public class HealthDisplay : MonoBehaviour {
 		GameObject p = GameObject.FindGameObjectWithTag("Player");
 		if(p != null) {
 			playerHealth = p.GetComponent<Health>();
-		}
-		curHealth = playerHealth.GetHealth();
-		fires = new Image[curHealth / 2];
-
-		for(int i = 0; i < fires.Length; i++) {
-			fires[i] = (Image)Instantiate(fireHealth, canvas.transform);
-			fires[i].rectTransform.anchorMin = new Vector2(0f, 0f);
-			fires[i].rectTransform.anchoredPosition = new Vector2(40f * (i+1), 40f);
+			maxHealth = playerHealth.GetHealth();
+			InitializeHealth();
 		}
 	}
 
@@ -45,6 +40,8 @@ public class HealthDisplay : MonoBehaviour {
 			GameObject p = GameObject.FindGameObjectWithTag("Player");
 			if(p != null) {
 				playerHealth = p.GetComponent<Health>();
+				maxHealth = playerHealth.GetHealth();
+				InitializeHealth();
 			}
 		}
 	}
@@ -64,7 +61,31 @@ public class HealthDisplay : MonoBehaviour {
 			}
 			else {
 				fire.sprite = emptyFire;
+
 			}
 		}
+	}
+
+	void InitializeHealth() {
+		curHealth = playerHealth.GetHealth();
+		fires = new Image[curHealth / 2];
+
+		for(int i = 0; i < fires.Length; i++) {
+			fires[i] = (Image)Instantiate(fireHealth, canvas.transform);
+			fires[i].rectTransform.anchorMin = new Vector2(0f, 0f);
+			fires[i].rectTransform.anchoredPosition = new Vector2(40f * (i+1), 40f);
+		}
+	}
+
+	public void IncreaseMax(int amount) {
+		fires = new Image[fires.Length + (amount / 2)];
+
+		for(int i = 0; i < fires.Length; i++) {
+			fires[i] = (Image)Instantiate(fireHealth, canvas.transform);
+			fires[i].rectTransform.anchorMin = new Vector2(0f, 0f);
+			fires[i].rectTransform.anchoredPosition = new Vector2(40f * (i+1), 40f);
+		}
+
+		UpdateHealth();
 	}
 }
