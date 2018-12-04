@@ -8,7 +8,7 @@ public class LoadingScreen : MonoBehaviour {
 	public Image load;
 	GameObject canvas;
 
-	public bool loading = false;
+	public bool loading = true;
 
 	void Start() {
 		canvas = GameObject.Find("Canvas");

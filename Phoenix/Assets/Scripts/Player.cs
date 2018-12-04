@@ -8,6 +8,7 @@ public class Player : MovingObject {
     public float restartLevelDelay = 1f;
     bool hasKey = false;
 
+	private HealthDisplay hd;
     private Animator animator;
 	private Image key;
 	private Text featherText;
@@ -18,7 +19,10 @@ public class Player : MovingObject {
 
 	// Use this for initialization
 	protected override void Start () {
+		hd = GameObject.Find("GameManager(Clone)").GetComponent<HealthDisplay>();
+
 		featherText = GameObject.Find("Feather_Text").GetComponent<Text>();
+		changeFeathers(PlayerPrefs.GetInt("Feathers"));
 
 		key = GameObject.Find("HUD_Key").GetComponent<Image>();
 		key.color = Color.black;
@@ -32,7 +36,6 @@ public class Player : MovingObject {
 
     // Update is called once per frame
     void Update () {
-
         float horizontal = 0;
         float vertical = 0;
 
@@ -100,6 +103,7 @@ public class Player : MovingObject {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Exit" && hasKey == true) {
+			SavePrefs();
 			Camera.main.GetComponent<LoadingScreen>().LoadScreen();
 			GetComponent<Health>().SetCanBeDamaged(false);
             GameManager.level++;
@@ -150,7 +154,16 @@ public class Player : MovingObject {
 	}
 
 	private void changeFeathers(int count) {
-		feathers++;
+		feathers += count;
 		featherText.text = "x" + feathers.ToString();
+	}
+
+	void SavePrefs() {
+		PlayerPrefs.SetInt("MaxHealth", hd.maxHealth);
+		PlayerPrefs.SetInt("Health", hd.curHealth);
+		PlayerPrefs.SetInt("Feathers", feathers);
+		print("MaxHealth: " + PlayerPrefs.GetInt("MaxHealth"));
+		print("Health: " + PlayerPrefs.GetInt("Health"));
+		print("Feathers: " + PlayerPrefs.GetInt("Feathers"));
 	}
 }
