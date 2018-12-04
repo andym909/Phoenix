@@ -8,6 +8,7 @@ public class ChaseAttack : MovingObject {
     private float speed = 2f;
     private float minDistance = 1f;
     private float range;
+    private static int damage = 1;
 
 	public float attackTimer = 2f;
 	float timer = 0f;
@@ -33,7 +34,8 @@ public class ChaseAttack : MovingObject {
 			ghostPlayer = player.transform.position;
 			if(Vector2.Distance(transform.position, player.transform.position) <= minDistance && timer >= attackTimer) {
 				anim.SetTrigger("attack");
-				player.GetComponent<Health>().LoseHealth(1);
+				player.GetComponent<Health>().LoseHealth(damage);
+                print(damage);
 				timer = 0f;
 			}
 			else {
@@ -83,4 +85,8 @@ public class ChaseAttack : MovingObject {
 		//hitwall.Damagewall(wallDamage);
 		//animator.SetTrigger("playerChop");
 	}
+
+    public void setDamage(int n) {
+        damage = n;
+    }
 }

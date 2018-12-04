@@ -7,7 +7,7 @@ public class ShootingAttack : MonoBehaviour {
 	GameObject player;
 	public float timer = 1f;
 	float timeElapsed = 0f;
-
+    private static int damage = 1;
 	public float range = 15f;
 
 	public GameObject projectile;
@@ -27,7 +27,7 @@ public class ShootingAttack : MonoBehaviour {
 				float atan = Mathf.Atan2(player.transform.position.y - transform.position.y, player.transform.position.x - transform.position.x);
 				Vector3 angle = new Vector3(0f, 0f, atan * (180f / Mathf.PI) + 140f); //WHO KNOWS WHY ITS + 140, IT JUST IS
 				GameObject tmp = (GameObject)Instantiate(projectile, transform.position, Quaternion.Euler(angle));
-				tmp.GetComponent<Arrow>().SetTarget(player.transform.position);
+				tmp.GetComponent<Arrow>().SetTarget(player.transform.position, damage);
 				timeElapsed = 0f;
 			}
 			else {
@@ -43,4 +43,8 @@ public class ShootingAttack : MonoBehaviour {
 	public void SetCanSee(bool b) {
 		canSee = b;
 	}
+
+    public void setDamage(int n) {
+        damage = n;
+    }
 }
