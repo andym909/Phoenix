@@ -8,7 +8,17 @@ public class CloseHelper : MonoBehaviour {
     private int damage = 2;
     float speed = 100f;
 
-	public void SetTarget (Vector3 t) {
+    public void SetDamage(int newVal)
+    {
+        damage = newVal;
+    }
+
+    public int GetDamage()
+    {
+        return this.damage;
+    }
+
+    public void SetTarget (Vector3 t) {
         target.x = t.x;
         target.y = t.y;
 	}

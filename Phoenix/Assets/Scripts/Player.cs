@@ -117,6 +117,17 @@ public class Player : MovingObject {
             other.gameObject.SetActive(false);
 			GameObject.FindGameObjectWithTag("Exit").GetComponent<Animator>().SetTrigger("OpenDoor");
         }
+        else if(other.tag == "Speed_PowerUp" && this.moveTime <= 18)
+        {
+            this.moveTime += 1;
+        }
+        else if(other.tag == "Damage_PowerUp")
+        {
+            int cDC = GetComponent<PlayerAttackClose>().GetComponent<CloseHelper>().GetDamage();
+            GetComponent<PlayerAttackClose>().GetComponent<CloseHelper>().SetDamage(cDC + 1);
+            int cDP = GetComponent<PlayerAttackDistance>().GetComponent<Helper>().GetDamage();
+            GetComponent<PlayerAttackDistance>().GetComponent<Helper>().SetDamage(cDP + 1);
+        }
     }
 
     protected override void OnCantMove<T>(T component) {
