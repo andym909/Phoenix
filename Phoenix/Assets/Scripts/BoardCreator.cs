@@ -82,10 +82,14 @@ public class BoardCreator : MonoBehaviour
 
         // Setup the first room, there is no previous corridor so we do not use one.
         rooms[0].SetupRoom(roomWidth, roomHeight, columns, rows);
+		Vector3 keyPos = new Vector3(-1, -1, 0);
+		keyPos.x = rooms[0].randomX();
+		keyPos.y = rooms[0].randomY();
+		rooms[0].addItem();
+		Instantiate(key, keyPos, Quaternion.identity);
 
         // Setup the first corridor using the first room.
         corridors[0].SetupCorridor(rooms[0], corridorLength, roomWidth, roomHeight, columns, rows, true);
-        Vector3 keyPos = new Vector3(-1, -1, 0);
         Vector3 exitPos = new Vector3(-1, -1, 0);
         Vector3 playerPos = new Vector3(-1, -1, 0);
         for (int i = 1; i < rooms.Length; i++)
@@ -106,43 +110,34 @@ public class BoardCreator : MonoBehaviour
                 corridors[i].SetupCorridor(rooms[i], corridorLength, roomWidth, roomHeight, columns, rows, false);
             }
 
-            if (i == 1)
+			if (i == rooms.Length *.5f || i == rooms.Length * .5f - .5f)
             {
-                playerPos.x = rooms[i].xPos;
-                playerPos.y = rooms[i].yPos;
+				playerPos.x = rooms[i].randomX();
+				playerPos.y = rooms[i].randomY();
+				rooms[i].addItem();
                 Instantiate(player, playerPos, Quaternion.identity);
-            }
-
-            if (i == rooms.Length *.5f || i == rooms.Length * .5f - .5f)
-            {
-                keyPos.x = rooms[i].xPos;
-                keyPos.y = rooms[i].yPos;
-                Instantiate(key, keyPos, Quaternion.identity);
             }
 
             if (i == rooms.Length - 1)
             {
-                exitPos.x = rooms[i].xPos;
-                exitPos.y = rooms[i].yPos;
+				exitPos.x = rooms[i].randomX();
+				exitPos.y = rooms[i].randomY();
+				rooms[i].addItem();
                 Instantiate(exit, exitPos, Quaternion.identity);
             }
 
-			if (keyPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
-                exitPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
-                playerPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) && 
+			if (rooms[i].getItems() < 1 && 
                 Random.value < 0.30) {
 				if(Random.value < 0.5) {
-					Instantiate(enemy1, new Vector3(rooms[i].xPos, rooms[i].yPos, 0), Quaternion.identity);
+					Instantiate(enemy1, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
 				}
 				else {
-					Instantiate(enemy2, new Vector3(rooms[i].xPos, rooms[i].yPos, 0), Quaternion.identity);
+					Instantiate(enemy2, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
 				}
 			}
-            else if(exitPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
-                playerPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) &&
-                keyPos != new Vector3(rooms[i].xPos, rooms[i].yPos, 0) && 
+			else if(rooms[i].getItems() < 1 && 
                 Random.value > 0.5) {
-                Instantiate(feather, new Vector3(rooms[i].xPos, rooms[i].yPos, 0), Quaternion.identity);
+				Instantiate(feather, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
             }
         }
 

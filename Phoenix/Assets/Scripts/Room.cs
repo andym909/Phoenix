@@ -7,7 +7,7 @@ public class Room
     public int roomWidth;                     // How many tiles wide the room is.
     public int roomHeight;                    // How many tiles high the room is.
     public Direction enteringCorridor;    // The direction of the corridor that is entering this room.
-
+	private int itemCount = 0;
 
     // This is used for the first room.  It does not have a Corridor parameter since there are no corridors yet.
     public void SetupRoom(IntRange widthRange, IntRange heightRange, int columns, int rows)
@@ -73,4 +73,20 @@ public class Room
                 break;
         }
     }
+
+	public float randomX() {
+		return Random.Range(xPos, xPos + roomWidth);
+	}
+
+	public float randomY() {
+		return Random.Range(yPos, yPos + roomHeight);
+	}
+
+	public void addItem() {
+		itemCount++;
+	}
+
+	public int getItems() {
+		return itemCount;
+	}
 }

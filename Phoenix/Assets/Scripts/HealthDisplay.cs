@@ -19,7 +19,10 @@ public class HealthDisplay : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-		playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+		GameObject p = GameObject.FindGameObjectWithTag("Player");
+		if(p != null) {
+			playerHealth = p.GetComponent<Health>();
+		}
 		curHealth = playerHealth.GetHealth();
 		fires = new Image[curHealth / 2];
 
@@ -31,10 +34,18 @@ public class HealthDisplay : MonoBehaviour {
 	}
 
 	void Update () {
-		int newHealth = playerHealth.GetHealth();
-		if(newHealth != curHealth) {
-			curHealth = newHealth;
-			UpdateHealth();
+		if(playerHealth != null) {
+			int newHealth = playerHealth.GetHealth();
+			if(newHealth != curHealth) {
+				curHealth = newHealth;
+				UpdateHealth();
+			}
+		}
+		else {
+			GameObject p = GameObject.FindGameObjectWithTag("Player");
+			if(p != null) {
+				playerHealth = p.GetComponent<Health>();
+			}
 		}
 	}
 
