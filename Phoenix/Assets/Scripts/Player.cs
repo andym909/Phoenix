@@ -124,7 +124,6 @@ public class Player : MovingObject {
     }
 
     private void Restart() {
-        print(GameManager.level);
         Application.LoadLevel(Application.loadedLevel);
     }
 
