@@ -40,7 +40,6 @@ public class Health : MonoBehaviour {
 	public void LoseHealth(int delta) {
 		if(canBeDamaged)
 			health -= delta;
-        print(health);
 	}
 
 	public bool IsAlive() {
