@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
 
     public void InitGame() {
         BoardCreator.level = GameManager.level;
+        setEnemyHealth();
         boardScript.SetupScene();
     }
 
@@ -31,6 +32,11 @@ public class GameManager : MonoBehaviour {
         GameManager.level = 1;
         Invoke("Restart", 1f);
         enabled = false;
+    }
+
+    public void setEnemyHealth() {
+        boardScript.enemy1.GetComponent<Health>().setStartingHealth((int)Mathf.Floor(3 * Mathf.Log(level) + 3));
+        boardScript.enemy2.GetComponent<Health>().setStartingHealth((int)Mathf.Floor(3 * Mathf.Log(level) + 3));
     }
 
     public void Restart() {

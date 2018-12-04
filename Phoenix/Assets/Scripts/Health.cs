@@ -25,6 +25,10 @@ public class Health : MonoBehaviour {
 		health = start;
 	}
 
+    public void setStartingHealth(int health) {
+        this.startingHealth = health;
+    }
+
 	public int GetHealth() {
 		return health;
 	}
@@ -36,6 +40,7 @@ public class Health : MonoBehaviour {
 	public void LoseHealth(int delta) {
 		if(canBeDamaged)
 			health -= delta;
+        print(health);
 	}
 
 	public bool IsAlive() {
