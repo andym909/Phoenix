@@ -24,7 +24,7 @@ public class HealthDisplay : MonoBehaviour {
 		if(p != null) {
 			playerHealth = p.GetComponent<Health>();
 			maxHealth = playerHealth.GetHealth();
-			UpdateMaxHealth();
+			InitializeHealth();
 		}
 	}
 
@@ -41,7 +41,7 @@ public class HealthDisplay : MonoBehaviour {
 			if(p != null) {
 				playerHealth = p.GetComponent<Health>();
 				maxHealth = playerHealth.GetHealth();
-				UpdateMaxHealth();
+				InitializeHealth();
 			}
 		}
 	}
