@@ -61,20 +61,22 @@ public class HealthDisplay : MonoBehaviour {
 			}
 			else {
 				fire.sprite = emptyFire;
-
 			}
 		}
 	}
 
 	void InitializeHealth() {
-		curHealth = playerHealth.GetHealth();
-		fires = new Image[curHealth / 2];
+		fires = new Image[maxHealth / 2];
 
 		for(int i = 0; i < fires.Length; i++) {
 			fires[i] = (Image)Instantiate(fireHealth, canvas.transform);
 			fires[i].rectTransform.anchorMin = new Vector2(0f, 0f);
 			fires[i].rectTransform.anchoredPosition = new Vector2(40f * (i+1), 40f);
+
+			fires[i].enabled = false;
 		}
+
+		UpdateHealth();
 	}
 
 	public void IncreaseMax(int amount) {
