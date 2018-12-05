@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BoardCreator : MonoBehaviour
 {
@@ -54,6 +55,7 @@ public class BoardCreator : MonoBehaviour
         InstantiateOuterWalls();
 
 		Camera.main.GetComponent<LoadingScreen>().FinishLoad();
+		GameObject.Find("FloorText").GetComponent<Text>().text = "Floor " + level;
     }
 
     void SetupTilesArray()
