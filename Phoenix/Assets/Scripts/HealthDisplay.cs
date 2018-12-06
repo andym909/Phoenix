@@ -28,6 +28,11 @@ public class HealthDisplay : MonoBehaviour {
 		}
 	}
 
+    public void increaseMaxHealth(int increm)
+    {
+        maxHealth += increm;
+    }
+
 	void Update () {
 		if(playerHealth != null) {
 			int newHealth = playerHealth.GetHealth();

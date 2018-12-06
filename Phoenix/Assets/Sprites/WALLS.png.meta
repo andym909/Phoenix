@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
 guid: 706dd6d4d2cfd3e479c12008c77a4d34
-=======
-guid: 00f9271a304899941b10a4e4b88e42e7
->>>>>>> Stashed changes
 TextureImporter:
   fileIDToRecycleName:
     21300000: WALLS_0
@@ -732,11 +728,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-<<<<<<< Updated upstream
     spriteID: c9820a3411e72c749a65b187545c8570
-=======
-    spriteID: 195035fd5731ab346826fba4d5e74986
->>>>>>> Stashed changes
     vertices: []
     indices: 
     edges: []

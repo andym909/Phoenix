@@ -8,16 +8,6 @@ public class Helper : MonoBehaviour {
     private int damage = 1;
     float speed = 8f;
 
-    public void SetDamage(int newVal)
-    {
-        damage = newVal;
-    }
-
-    public int GetDamage()
-    {
-        return this.damage;
-    }
-
     public void SetTarget(Vector3 t) {
         // make sure x direction is within the board
         if (t.x < 0)
@@ -45,6 +35,15 @@ public class Helper : MonoBehaviour {
         if (transform.position == target)
             Destroy(gameObject);
 	}
+
+    public void increaseDamage(int increm)
+    {
+        damage += increm;
+    }
+    public int getDamage()
+    {
+        return damage;
+    }
 
     private void OnCollisionEnter2D(Collision2D obj) {
 		if(obj.gameObject.tag.Equals("Enemy")) {

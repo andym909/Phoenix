@@ -121,17 +121,26 @@ public class Player : MovingObject {
             other.gameObject.SetActive(false);
 			GameObject.FindGameObjectWithTag("Exit").GetComponent<Animator>().SetTrigger("OpenDoor");
         }
-        else if(other.tag == "Speed_PowerUp" && this.moveTime <= 18)
+        else if(other.tag == "Speed_PowerUp" && this.moveTime <= 18f)
         {
-            this.moveTime += 1;
+            this.moveTime++;
+            print(this.moveTime);
             other.gameObject.SetActive(false);
         }
-        else if(other.tag == "Damage_PowerUp")
+        else if (other.tag == "Damage_PowerUp")
         {
-            int cDC = GetComponent<PlayerAttackClose>().GetComponent<CloseHelper>().GetDamage();
-            GetComponent<PlayerAttackClose>().GetComponent<CloseHelper>().SetDamage(cDC + 1);
-            int cDP = GetComponent<PlayerAttackDistance>().GetComponent<Helper>().GetDamage();
-            GetComponent<PlayerAttackDistance>().GetComponent<Helper>().SetDamage(cDP + 1);
+            CloseHelper closeHelp = GetComponent<PlayerAttackClose>().invisibleProjectile.GetComponent<CloseHelper>();
+            closeHelp.increaseDamage(1);
+            print(closeHelp.getDamage());
+            Helper rangeHelp = GetComponent<PlayerAttackDistance>().projectile.GetComponent<Helper>();
+            rangeHelp.increaseDamage(1);
+            print(rangeHelp.getDamage());
+            other.gameObject.SetActive(false);
+        }
+        else if (other.tag == "Health_PowerUp")
+        {
+            hd.maxHealth += 2;
+            print(hd.maxHealth);
             other.gameObject.SetActive(false);
         }
     }
