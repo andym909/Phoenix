@@ -13,7 +13,7 @@ public class TitleScreen : MonoBehaviour {
 		PlayerPrefs.SetInt("MaxHealth", 10);
 		PlayerPrefs.SetInt("Health", 10);
 		PlayerPrefs.SetInt("Feathers", 0);
-		PlayerPrefs.SetInt("Start", 1);
+		PlayerPrefs.SetInt("Start", PlayerPrefs.GetInt("Start") == -1 ? 2 : 1);
 
 		tutorialImage = GameObject.Find("TutorialImage").GetComponent<Image>();
 	}

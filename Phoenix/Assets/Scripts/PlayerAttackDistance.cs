@@ -11,9 +11,12 @@ public class PlayerAttackDistance : MonoBehaviour {
 	public float cooldown = 0.75f;
 	float cooldownTimer;
 
+	SoundEffects se;
+
 	// Use this for initialization
 	void Start () {
 		cooldownTimer = cooldown;
+		se = Camera.main.GetComponent<SoundEffects>();
 	}
 	
 	// Update is called once per frame
@@ -26,6 +29,7 @@ public class PlayerAttackDistance : MonoBehaviour {
 			tmp.GetComponent<Helper>().SetTarget(getTarget(direction));
 			GetComponent<Player>().ResetIdleTimer();
 			cooldownTimer = 0f;
+			se.PlayFireballShoot();
 		}
 		else {
 			cooldownTimer += Time.deltaTime;

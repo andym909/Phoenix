@@ -6,7 +6,13 @@ public class PlayerAttackClose : MonoBehaviour {
 
     public float attDistance = 2.0f;
     public GameObject invisibleProjectile;
-	
+
+	SoundEffects se;
+
+	void Start() {
+		se = Camera.main.GetComponent<SoundEffects>();
+	}
+
 	void Update () {
 		if (Camera.main.GetComponent<LoadingScreen>().loading == false && Input.GetButtonDown("Jump")) {
             // get the direction we're going
@@ -15,6 +21,7 @@ public class PlayerAttackClose : MonoBehaviour {
             GameObject tmp = (GameObject)Instantiate(invisibleProjectile, transform.position, Quaternion.identity);
             tmp.GetComponent<CloseHelper>().SetTarget(getTarget(direction));
 			GetComponent<Player>().ResetIdleTimer();
+			se.PlayPlayerMelee();
         }
 	}
 

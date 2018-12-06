@@ -10,8 +10,14 @@ public class Health : MonoBehaviour {
 
 	public int startingHealth;
 
+	SoundEffects se;
+
 	void Awake () {
 		SetHealth(PlayerPrefs.GetInt("Health"));
+	}
+
+	void Start() {
+		se = Camera.main.GetComponent<SoundEffects>();
 	}
 
 	void Update () {
@@ -43,10 +49,29 @@ public class Health : MonoBehaviour {
 	public void LoseHealth(int delta) {
 		if(canBeDamaged)
 			health -= delta;
+
+		if(this.tag == "Player") {
+			se.PlayPlayerHurt();
+		}
+		else if(this.tag == "Enemy") {
+			se.PlayEnemyHurt();
+		}
 	}
 
 	public bool IsAlive() {
-		return health > 0;
+		bool alive = health > 0;
+
+		if(!alive) {
+			if(this.tag == "Player") {
+				se.PlayPlayerDeath();
+				se.PlayNecroDeath();
+			}
+			else if(this.tag == "Enemy") {
+				se.PlayEnemyDeath();
+			}
+		}
+
+		return alive;
 	}
 
 	public bool CanBeDamaged() {
