@@ -8,9 +8,11 @@ public class PlayerAttackClose : MonoBehaviour {
     public GameObject invisibleProjectile;
 
 	SoundEffects se;
+	MeleeEffects me;
 
 	void Start() {
 		se = Camera.main.GetComponent<SoundEffects>();
+		me = GetComponentInChildren<MeleeEffects>();
 	}
 
 	void Update () {
@@ -22,6 +24,7 @@ public class PlayerAttackClose : MonoBehaviour {
             tmp.GetComponent<CloseHelper>().SetTarget(getTarget(direction));
 			GetComponent<Player>().ResetIdleTimer();
 			se.PlayPlayerMelee();
+			me.MeleeAttackAnim();
         }
 	}
 

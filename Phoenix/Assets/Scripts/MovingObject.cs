@@ -42,7 +42,9 @@ public abstract class MovingObject : MonoBehaviour {
 
 		if(hit.transform == null) {
 			Vector3 movement = new Vector3(xDir, yDir, 0f) * Time.deltaTime * moveTime;
+			float ix = transform.position.x;
 			transform.Translate(movement);
+			print(ix + " " + transform.position.x);
 			return;
 		}
 

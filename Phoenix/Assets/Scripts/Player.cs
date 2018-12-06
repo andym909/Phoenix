@@ -45,6 +45,7 @@ public class Player : MovingObject {
 		}
 
 		if(horizontal != 0) {
+			print("horizontal");
 			animator.SetBool("movement", true);
 			vertical = 0;
 
@@ -158,5 +159,9 @@ public class Player : MovingObject {
 		print("MaxHealth: " + PlayerPrefs.GetInt("MaxHealth"));
 		print("Health: " + PlayerPrefs.GetInt("Health"));
 		print("Feathers: " + PlayerPrefs.GetInt("Feathers"));
+	}
+
+	public int GetFacing() {
+		return animator.GetInteger("facing");
 	}
 }
