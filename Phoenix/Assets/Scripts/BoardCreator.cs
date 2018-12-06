@@ -26,6 +26,7 @@ public class BoardCreator : MonoBehaviour
 	public GameObject enemy1;
 	public GameObject enemy2;
     public GameObject feather;
+	public GameObject merchant;
     public static int level = 1;
 
     private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
@@ -96,6 +97,8 @@ public class BoardCreator : MonoBehaviour
         corridors[0].SetupCorridor(rooms[0], corridorLength, roomWidth, roomHeight, columns, rows, true);
         Vector3 exitPos = new Vector3(-1, -1, 0);
         Vector3 playerPos = new Vector3(-1, -1, 0);
+		Vector3 merchantPos = new Vector3(-1, -1, 0);
+
         for (int i = 1; i < rooms.Length; i++)
         {
             // Create a room.
@@ -120,6 +123,14 @@ public class BoardCreator : MonoBehaviour
 				playerPos.y = rooms[i].randomY();
 				rooms[i].addItem();
                 Instantiate(player, playerPos, Quaternion.identity);
+
+				merchantPos = playerPos;
+				while(Vector3.Distance(playerPos, merchantPos) < merchant.GetComponent<Merchant>().distance) {
+					merchantPos.x = rooms[i].randomX();
+					merchantPos.y = rooms[i].randomY() + 0.15f;
+				}
+				rooms[i].addItem();
+				Instantiate(merchant, merchantPos, Quaternion.identity);
             }
 
             if (i == rooms.Length - 1)
@@ -140,7 +151,7 @@ public class BoardCreator : MonoBehaviour
 				}
 			}
 			else if(rooms[i].getItems() < 1 && 
-                Random.value > 0.5) {
+                Random.value > 0.6) {
 				Instantiate(feather, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
             }
         }

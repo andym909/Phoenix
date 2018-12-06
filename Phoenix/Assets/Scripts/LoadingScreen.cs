@@ -7,6 +7,7 @@ public class LoadingScreen : MonoBehaviour {
 
 	public Image load;
 	GameObject canvas;
+	SoundEffects se;
 
 	public bool loading = true;
 	float paddingTime = 1f;
@@ -14,10 +15,20 @@ public class LoadingScreen : MonoBehaviour {
 	bool endingLoad = false;
 
 	void Start() {
+		se = Camera.main.GetComponent<SoundEffects>();
 		canvas = GameObject.Find("Canvas");
 		if(PlayerPrefs.GetInt("Start") == 1) {
 			LoadScreen();
 			PlayerPrefs.SetInt("Start", 0);
+			se.PlayNecroStart();
+		}
+		else if(PlayerPrefs.GetInt("Start") == 2) {
+			LoadScreen();
+			se.PlayNecroStartAgain();
+			PlayerPrefs.SetInt("Start", 0);
+		}
+		else {
+			se.PlayNecroLoad();
 		}
 	}
 
@@ -40,7 +51,6 @@ public class LoadingScreen : MonoBehaviour {
 		if(endingLoad) {
 			if(paddingTimer < paddingTime) {
 				paddingTimer += Time.deltaTime;
-				print(paddingTimer);
 			}
 			else {
 				paddingTimer = 0f;

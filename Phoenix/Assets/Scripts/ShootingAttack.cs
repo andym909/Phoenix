@@ -15,9 +15,12 @@ public class ShootingAttack : MonoBehaviour {
 
 	bool canSee = false;
 
+	SoundEffects se;
+
 	void Start() {
 		player = GameObject.FindGameObjectWithTag("Player");
 		anim = GetComponent<Animator>();
+		se = Camera.main.GetComponent<SoundEffects>();
 	}
 
 	void Update () {
@@ -29,6 +32,7 @@ public class ShootingAttack : MonoBehaviour {
 				GameObject tmp = (GameObject)Instantiate(projectile, transform.position, Quaternion.Euler(angle));
 				tmp.GetComponent<Arrow>().SetTarget(player.transform.position, damage);
 				timeElapsed = 0f;
+				se.PlayFireballShoot();
 			}
 			else {
 				timeElapsed += Time.deltaTime;
