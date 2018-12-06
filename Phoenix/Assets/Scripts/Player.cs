@@ -142,7 +142,11 @@ public class Player : MovingObject {
 		idleTimer = 0f;
 	}
 
-	private void changeFeathers(int count) {
+	public int GetFeathers() {
+		return feathers;
+	}
+
+	public void changeFeathers(int count) {
 		feathers += count;
 		featherText.text = "x" + feathers.ToString();
 	}
