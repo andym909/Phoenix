@@ -19,7 +19,7 @@ public class ChaseAttack : MovingObject {
 	Vector3 ghostPlayer;
 
     // Use this for initialization
-    void Awake () {
+    void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
 		anim = GetComponent<Animator>();
 		ghostPlayer = transform.position;
@@ -44,6 +44,7 @@ public class ChaseAttack : MovingObject {
 		}
 		if(player != null) {
 			range = Vector2.Distance(transform.position, ghostPlayer);
+
 			if(range > minDistance) {
 				float xDist = ghostPlayer.x - transform.position.x;
 				float yDist = ghostPlayer.y - transform.position.y;

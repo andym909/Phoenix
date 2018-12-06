@@ -45,7 +45,6 @@ public class Player : MovingObject {
 		}
 
 		if(horizontal != 0) {
-			print("horizontal");
 			animator.SetBool("movement", true);
 			vertical = 0;
 
