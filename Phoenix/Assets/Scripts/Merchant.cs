@@ -40,7 +40,7 @@ public class Merchant : MonoBehaviour {
 			exchange.enabled = false;
 		}
 
-		if(Input.GetKeyDown(KeyCode.X) && exchange.enabled == true && hd.curHealth < hd.maxHealth) {
+		if(Input.GetButtonDown("Fire2") && exchange.enabled == true && hd.curHealth < hd.maxHealth) {
 			if(p.GetFeathers() > 0) {
 				p.changeFeathers(-1);
 				hp.GainHealth(1);
