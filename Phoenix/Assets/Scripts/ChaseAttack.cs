@@ -35,7 +35,6 @@ public class ChaseAttack : MovingObject {
 			if(Vector2.Distance(transform.position, player.transform.position) <= minDistance && timer >= attackTimer) {
 				anim.SetTrigger("attack");
 				player.GetComponent<Health>().LoseHealth(damage);
-                print(damage);
 				timer = 0f;
 			}
 			else {
