@@ -34,30 +34,29 @@ public class ChaseAttack : MovingObject {
 			ghostPlayer = player.transform.position;
 			if(Vector2.Distance(transform.position, player.transform.position) <= minDistance && timer >= attackTimer) {
 				anim.SetTrigger("attack");
+				anim.SetBool("movement", false);
 				player.GetComponent<Health>().LoseHealth(damage);
 				timer = 0f;
-			}
-			else {
-				anim.SetInteger("movement", -1);
 			}
 		}
 		if(player != null) {
 			range = Vector2.Distance(transform.position, ghostPlayer);
 
 			if(range > minDistance) {
+				anim.SetBool("movement", true);
 				float xDist = ghostPlayer.x - transform.position.x;
 				float yDist = ghostPlayer.y - transform.position.y;
 				if(Mathf.Abs(xDist) > Mathf.Abs(yDist)) {
 					if(xDist < 0)
-						anim.SetInteger("movement", 3);
+						anim.SetInteger("facing", 3);
 					else
-						anim.SetInteger("movement", 1);
+						anim.SetInteger("facing", 1);
 				}
 				else {
 					if(yDist < 0)
-						anim.SetInteger("movement", 2);
+						anim.SetInteger("facing", 2);
 					else
-						anim.SetInteger("movement", 0);
+						anim.SetInteger("facing", 0);
 				}
 				transform.position = Vector2.MoveTowards(transform.position, ghostPlayer, speed * Time.deltaTime);
 			}
