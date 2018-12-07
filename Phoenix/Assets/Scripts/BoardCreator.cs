@@ -145,7 +145,7 @@ public class BoardCreator : MonoBehaviour
             }
 
 			float r = Random.value;
-			if(rooms[i].getItems() < 1 && r < 0.5) {
+			if(rooms[i].getItems() < 1 && r < 0.6) {
 				if(Random.value < 0.5) {
 					Instantiate(enemy1, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
 				}
@@ -153,7 +153,7 @@ public class BoardCreator : MonoBehaviour
 					Instantiate(enemy2, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
 				}
 			}
-			else if(rooms[i].getItems() < 1 && r < 0.8) {
+			else if(rooms[i].getItems() < 1 && r < 0.9) {
 				Instantiate(feather, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
 			}
 			else if(rooms[i].getItems() < 1) {
