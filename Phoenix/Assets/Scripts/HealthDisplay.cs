@@ -31,6 +31,7 @@ public class HealthDisplay : MonoBehaviour {
     public void increaseMaxHealth(int increm)
     {
         maxHealth += increm;
+		InitializeHealth();
     }
 
 	void Update () {
@@ -85,6 +86,7 @@ public class HealthDisplay : MonoBehaviour {
 	}
 
 	public void IncreaseMax(int amount) {
+		maxHealth += amount;
 		fires = new Image[fires.Length + (amount / 2)];
 
 		for(int i = 0; i < fires.Length; i++) {
@@ -93,6 +95,7 @@ public class HealthDisplay : MonoBehaviour {
 			fires[i].rectTransform.anchoredPosition = new Vector2(40f * (i+1), 40f);
 		}
 
+		PlayerPrefs.SetInt("MaxHealth", maxHealth);
 		UpdateHealth();
 	}
 }

@@ -27,6 +27,9 @@ public class BoardCreator : MonoBehaviour
 	public GameObject enemy2;
     public GameObject feather;
 	public GameObject merchant;
+	public GameObject dmgOrb;
+	public GameObject healthOrb;
+	public GameObject speedOrb;
     public static int level = 1;
 
     private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
@@ -141,8 +144,8 @@ public class BoardCreator : MonoBehaviour
                 Instantiate(exit, exitPos, Quaternion.identity);
             }
 
-			if (rooms[i].getItems() < 1 && 
-                Random.value < 0.7) {
+			float r = Random.value;
+			if(rooms[i].getItems() < 1 && r < 0.5) {
 				if(Random.value < 0.5) {
 					Instantiate(enemy1, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
 				}
@@ -150,10 +153,14 @@ public class BoardCreator : MonoBehaviour
 					Instantiate(enemy2, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
 				}
 			}
-			else if(rooms[i].getItems() < 1 && 
-                Random.value > 0.6) {
+			else if(rooms[i].getItems() < 1 && r < 0.8) {
 				Instantiate(feather, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
-            }
+			}
+			else if(rooms[i].getItems() < 1) {
+				r = Random.value;
+				GameObject insert = r < 0.333 ? dmgOrb : (r < 0.667 ? healthOrb : speedOrb);
+				Instantiate(insert, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
+			}
         }
 
     }

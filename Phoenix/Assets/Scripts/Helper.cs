@@ -5,8 +5,12 @@ using UnityEngine;
 public class Helper : MonoBehaviour {
 
     private Vector3 target;
-    private int damage = 1;
+    private static int damage = 1;
     float speed = 8f;
+
+	void Start() {
+		damage = PlayerPrefs.GetInt("RangeDmg");
+	}
 
     public void SetTarget(Vector3 t) {
         // make sure x direction is within the board
@@ -39,7 +43,9 @@ public class Helper : MonoBehaviour {
     public void increaseDamage(int increm)
     {
         damage += increm;
+		PlayerPrefs.SetInt("RangeDmg", damage);
     }
+
     public int getDamage()
     {
         return damage;

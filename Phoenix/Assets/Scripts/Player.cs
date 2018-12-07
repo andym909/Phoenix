@@ -124,23 +124,20 @@ public class Player : MovingObject {
         else if(other.tag == "Speed_PowerUp" && this.moveTime <= 18f)
         {
             this.moveTime++;
-            print(this.moveTime);
+			PlayerPrefs.SetInt("Speed", moveTime);
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Damage_PowerUp")
         {
             CloseHelper closeHelp = GetComponent<PlayerAttackClose>().invisibleProjectile.GetComponent<CloseHelper>();
             closeHelp.increaseDamage(1);
-            print(closeHelp.getDamage());
             Helper rangeHelp = GetComponent<PlayerAttackDistance>().projectile.GetComponent<Helper>();
             rangeHelp.increaseDamage(1);
-            print(rangeHelp.getDamage());
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Health_PowerUp")
         {
-            hd.maxHealth += 2;
-            print(hd.maxHealth);
+			hd.IncreaseMax(2);
             other.gameObject.SetActive(false);
         }
     }

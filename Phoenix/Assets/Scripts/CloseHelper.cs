@@ -5,8 +5,12 @@ using UnityEngine;
 public class CloseHelper : MonoBehaviour {
 
     private Vector3 target;
-    private int damage = 2;
+    private static int damage = 2;
     float speed = 20f;
+
+	void Start() {
+		damage = PlayerPrefs.GetInt("MeleeDmg");
+	}
 
 	public void SetTarget (Vector3 t) {
         target.x = t.x;
@@ -16,6 +20,7 @@ public class CloseHelper : MonoBehaviour {
     public void increaseDamage(int increm)
     {
         damage += increm;
+		PlayerPrefs.SetInt("MeleeDmg", damage);
     }
 
     public int getDamage()

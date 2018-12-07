@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class MovingObject : MonoBehaviour {
 
-    public float moveTime = 10f;
+	[System.NonSerialized]
+    public int moveTime;
     public LayerMask blockingLayer;
 	public float hitDistance;
 
@@ -19,6 +20,7 @@ public abstract class MovingObject : MonoBehaviour {
         boxCollider = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         inverseMoveTime = 1f / moveTime;
+		moveTime = PlayerPrefs.GetInt("Speed");
 	}
 
     protected bool Move(int xDir, int yDir, out RaycastHit2D hit) {
