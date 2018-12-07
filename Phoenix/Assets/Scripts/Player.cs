@@ -181,4 +181,8 @@ public class Player : MovingObject {
 		print("Health: " + PlayerPrefs.GetInt("Health"));
 		print("Feathers: " + PlayerPrefs.GetInt("Feathers"));
 	}
+
+	public int GetFacing() {
+		return animator.GetInteger("facing");
+	}
 }

@@ -142,7 +142,7 @@ public class BoardCreator : MonoBehaviour
             }
 
 			if (rooms[i].getItems() < 1 && 
-                Random.value < 0.30) {
+                Random.value < 0.7) {
 				if(Random.value < 0.5) {
 					Instantiate(enemy1, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
 				}

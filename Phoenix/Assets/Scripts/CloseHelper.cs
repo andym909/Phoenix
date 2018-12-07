@@ -6,7 +6,7 @@ public class CloseHelper : MonoBehaviour {
 
     private Vector3 target;
     private int damage = 2;
-    float speed = 100f;
+    float speed = 20f;
 
 	public void SetTarget (Vector3 t) {
         target.x = t.x;
@@ -29,7 +29,8 @@ public class CloseHelper : MonoBehaviour {
             Destroy(gameObject);
 	}
 
-    private void OnCollisionEnter2D(Collision2D obj) {
+    private void OnCollisionStay2D(Collision2D obj) {
+		print(obj.gameObject.tag);
         if (obj.gameObject.tag.Equals("Enemy")) {
             obj.gameObject.GetComponent<Health>().LoseHealth(damage);
         }

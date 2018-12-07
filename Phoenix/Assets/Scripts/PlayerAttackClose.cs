@@ -8,21 +8,32 @@ public class PlayerAttackClose : MonoBehaviour {
     public GameObject invisibleProjectile;
 
 	SoundEffects se;
+	MeleeEffects me;
+
+	public float cooldown = 0.75f;
+	float cooldownTimer;
 
 	void Start() {
 		se = Camera.main.GetComponent<SoundEffects>();
+		me = GetComponentInChildren<MeleeEffects>();
+		cooldownTimer = cooldown;
 	}
 
 	void Update () {
-		if (Camera.main.GetComponent<LoadingScreen>().loading == false && Input.GetButtonDown("Jump")) {
-            // get the direction we're going
-            // -1 idle, 0 up, 1 right, 2 down, 3 left
-            int direction = this.GetComponent<Animator>().GetInteger("facing");
-            GameObject tmp = (GameObject)Instantiate(invisibleProjectile, transform.position, Quaternion.identity);
-            tmp.GetComponent<CloseHelper>().SetTarget(getTarget(direction));
+		if(Camera.main.GetComponent<LoadingScreen>().loading == false && cooldownTimer >= cooldown && Input.GetButtonDown("Jump")) {
+			// get the direction we're going
+			// -1 idle, 0 up, 1 right, 2 down, 3 left
+			int direction = this.GetComponent<Animator>().GetInteger("facing");
+			GameObject tmp = (GameObject)Instantiate(invisibleProjectile, transform.position, Quaternion.identity);
+			tmp.GetComponent<CloseHelper>().SetTarget(getTarget(direction));
 			GetComponent<Player>().ResetIdleTimer();
 			se.PlayPlayerMelee();
-        }
+			me.MeleeAttackAnim();
+			cooldownTimer = 0f;
+		}
+		else {
+			cooldownTimer += Time.deltaTime;
+		}
 	}
 
     Vector3 getTarget(int dir) {
