@@ -4,11 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/*
+ * 	Handles the short but important logic for the title screen
+ * 
+ */ 
+
 public class TitleScreen : MonoBehaviour {
 
-	bool tutorial = false;
-	Image tutorialImage;
+	bool tutorial = false;	// If the tutorial screen is showing
+	Image tutorialImage;	// Reference to tutorial image
 
+	// Setting lots of player preferences that will be accessed by many scripts later
 	void Start() {
 		PlayerPrefs.SetInt("MaxHealth", 10);
 		PlayerPrefs.SetInt("Health", 10);
@@ -22,6 +28,7 @@ public class TitleScreen : MonoBehaviour {
 		tutorialImage = GameObject.Find("TutorialImage").GetComponent<Image>();
 	}
 
+	// Manage the change from title screen to tutorial screen to game
 	void Update() {
 		if(Input.anyKeyDown) {
 			if(tutorial) {

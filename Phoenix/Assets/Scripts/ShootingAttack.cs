@@ -2,21 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 	A class that describes the behavior of the Enemy that shoots at the Player
+ * 
+ */ 
+
 public class ShootingAttack : MonoBehaviour {
 
-	GameObject player;
-	public float timer = 1f;
-	float timeElapsed = 0f;
-    private static int damage = 1;
-	public float range = 15f;
+	GameObject player;				// Reference to the player object
+	public float timer = 1f;		// Cooldown time (public so it can be changed in-editor)
+	float timeElapsed = 0f;			// Cooldown timer
+	private static int damage = 1;	// Damage done by the projectiles
+	public float range = 15f;		// Range of the projectiles (public so it can be changed in-editor)
 
-	public GameObject projectile;
-	Animator anim;
+	public GameObject projectile;	// Reference to the projectile prefab
+	Animator anim;					// Reference to the animator
 
-	bool canSee = false;
+	bool canSee = false;			// If the enemy can see the player
 
-	SoundEffects se;
+	SoundEffects se;				// Reference to the sound effects script
 
+
+	// Set references
 	void Start() {
 		player = GameObject.FindGameObjectWithTag("Player");
 		anim = GetComponent<Animator>();
@@ -24,6 +31,7 @@ public class ShootingAttack : MonoBehaviour {
 	}
 
 	void Update () {
+		// Attacks if in visible, in range, and the cooldown has elapsed
 		if(Vector3.Distance(player.transform.position, transform.position) < range) {	
 			anim.SetBool("isAttacking", true);
 			if(canSee && timeElapsed >= timer && player != null) {
@@ -44,10 +52,12 @@ public class ShootingAttack : MonoBehaviour {
 		}
 	}
 
+	// Setter for canSee
 	public void SetCanSee(bool b) {
 		canSee = b;
 	}
 
+	// Setter for damage
     public void setDamage(int n) {
         damage = n;
     }

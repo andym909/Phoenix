@@ -2,25 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 	This script controls the visuals of the Player's melee attack
+ * 
+ */ 
+
 public class MeleeEffects : MonoBehaviour {
 
-	Player player;
-	Animator anim;
-	SpriteRenderer sprite;
-	int facing;
-	float offset = 0.65f;
+	Player player;			// Reference to the Player script
+	Animator anim;			// Reference to the melee attack animator
+	SpriteRenderer sprite;	// Reference to the melee sprites
+	int facing;				// Direction in which the player is facing
+	float offset = 0.65f;	// How far away the graphics will be from the player's center
 
+	// Set References to objects
 	void Start() {
 		player = GetComponentInParent<Player>();
 		anim = GetComponentInChildren<Animator>();
 		sprite = GetComponentInChildren<SpriteRenderer>();
 	}
 
+	// Update the direction the player is facing and position
 	void Update() {
 		facing = player.GetFacing();
 		UpdatePos();
 	}
 
+	// Set position and rotation based on player and change sorting layer for visual effect
 	void UpdatePos() {
 		Vector3 parentPos = transform.parent.transform.position;
 		switch(facing) {
@@ -49,6 +57,7 @@ public class MeleeEffects : MonoBehaviour {
 		}
 	}
 
+	// Trigger the actual animation
 	public void MeleeAttackAnim() {
 		anim.SetTrigger("attack");
 	}

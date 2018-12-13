@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 		Plays every sound effect in the game
+ * 
+ */ 
+
 public class SoundEffects : MonoBehaviour {
 
+
+	// References to many, many, different audio clips
 	public AudioClip necroStart;
 	public AudioClip[] necroLoad;
 	public AudioClip necroDeath;
@@ -15,17 +22,20 @@ public class SoundEffects : MonoBehaviour {
 	public AudioClip[] enemyHurt;
 	public AudioClip enemyDeath;
 
+	// Audio Source references
 	AudioSource source;
 	AudioSource source2;
 
-	// Use this for initialization
+	// Setting the source references
 	void Awake () {
 		source = GetComponent<AudioSource>();
 	}
-
 	void Start() {
 		source2 = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
 	}
+
+	// Every one of the following methods simply plays the clip that is specified in the method name.
+	//		There is also some volume tweaking that occurs.
 
 	public void PlayNecroDeath() {
 		source.volume = 1;

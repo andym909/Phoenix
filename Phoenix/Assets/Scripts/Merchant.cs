@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * 	Controller for merchant logic and visuals
+ * 	
+ */ 
+
 public class Merchant : MonoBehaviour {
 
-	GameObject player;
-	Animator anim;
-	Text exchange;
-	Player p;
-	Health hp;
-	HealthDisplay hd;
+	GameObject player;	// Reference to the Player
+	Animator anim;		// Reference to the merchant animator
+	Text exchange;		// Reference to the text prompting the player
+	Player p;			// Reference to the player script
+	Health hp;			// Reference to the Player Health
+	HealthDisplay hd;	// Reference to the HUD Health display
 
-	public float distance;
-	bool withinDistance = false;
-	bool merchantOpen = false;
+	float distance = 1.5f;  		// Distance at which the merchant and player can interact
+	bool withinDistance = false;	// If within that distance
+	bool merchantOpen = false;		// If the player has opened the merchant animation
 
-	// Use this for initialization
+	// Set all those references
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
 		p = player.GetComponent<Player>();
@@ -28,6 +33,7 @@ public class Merchant : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// Set animation and exchange text when the Player is within the distance
 		if(Vector3.Distance(transform.position, player.transform.position) <= distance) {
 			anim.SetTrigger("merchantPop");
 			withinDistance = true;
@@ -40,6 +46,7 @@ public class Merchant : MonoBehaviour {
 			exchange.enabled = false;
 		}
 
+		// Exchange a feather for health on correct input
 		if(Input.GetButtonDown("Fire2") && exchange.enabled == true && hd.GetCurHealth() < hd.GetMaxHealth()) {
 			if(p.GetFeathers() > 0) {
 				p.changeFeathers(-1);
@@ -48,6 +55,7 @@ public class Merchant : MonoBehaviour {
 		}
 	}
 
+	// Show the exchange text
 	public void ShowExchangeText() {
 		merchantOpen = true;
 		if(withinDistance) {
