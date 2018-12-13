@@ -17,6 +17,8 @@ public class Player : MovingObject {
 	float idleTime = 2f;
 	float idleTimer = 0f;
 
+	bool gameEnding = false;
+
 	// Use this for initialization
 	protected override void Start () {
 		hd = GameObject.Find("GameManager(Clone)").GetComponent<HealthDisplay>();
@@ -36,69 +38,69 @@ public class Player : MovingObject {
 
     // Update is called once per frame
     void Update () {
-        float horizontal = 0;
-        float vertical = 0;
+		if(!gameEnding) {
+			checkIfGameOver();
 
-		if(Camera.main.GetComponent<LoadingScreen>().loading == false) {
-			horizontal = Input.GetAxisRaw("Horizontal");
-			vertical = Input.GetAxisRaw("Vertical");
-		}
+			float horizontal = 0;
+			float vertical = 0;
 
-		if(horizontal != 0) {
-			animator.SetBool("movement", true);
-			vertical = 0;
-
-			if(horizontal > 0) {
-				animator.SetInteger("facing", 1);
+			if(Camera.main != null && Camera.main.GetComponent<LoadingScreen>().loading == false) {
+				horizontal = Input.GetAxisRaw("Horizontal");
+				vertical = Input.GetAxisRaw("Vertical");
 			}
-			else {
-				animator.SetInteger("facing", 3);
-			}
-		}
-		else if(vertical > 0) {
-			animator.SetBool("movement", true);
-			animator.SetInteger("facing", 0);
-		}
-		else if(vertical < 0) {
-			animator.SetBool("movement", true);
-			animator.SetInteger("facing", 2);
-		}
-		else {
-			animator.SetBool("movement", false);
-		}
 
-		if(horizontal != 0 || vertical != 0) {
-            if(horizontal != 0 && horizontal > 0)
-            {
-                horizontal += 1 - horizontal;
-            }
-            else if(horizontal != 0 && horizontal < 0)
-            {
-                horizontal += -1 - horizontal;
-            }
-            if (vertical != 0 && vertical > 0)
-            {
-                vertical += 1 - vertical;
-            }
-            else if (vertical != 0 && vertical < 0)
-            {
-                vertical += -1 - vertical;
-            }
-            idleTimer = 0f;
-			AttemptMove<Wall>((int)horizontal, (int)vertical);
-		}
-		else {
-			idleTimer += Time.deltaTime;
-			if(idleTimer >= idleTime) {
+			if(horizontal != 0) {
+				animator.SetBool("movement", true);
+				vertical = 0;
+
+				if(horizontal > 0) {
+					animator.SetInteger("facing", 1);
+				}
+				else {
+					animator.SetInteger("facing", 3);
+				}
+			}
+			else if(vertical > 0) {
+				animator.SetBool("movement", true);
+				animator.SetInteger("facing", 0);
+			}
+			else if(vertical < 0) {
+				animator.SetBool("movement", true);
 				animator.SetInteger("facing", 2);
 			}
-			StopMotion();
+			else {
+				animator.SetBool("movement", false);
+			}
+
+			if(horizontal != 0 || vertical != 0) {
+				if(horizontal != 0 && horizontal > 0) {
+					horizontal += 1 - horizontal;
+				}
+				else if(horizontal != 0 && horizontal < 0) {
+					horizontal += -1 - horizontal;
+				}
+				if(vertical != 0 && vertical > 0) {
+					vertical += 1 - vertical;
+				}
+				else if(vertical != 0 && vertical < 0) {
+					vertical += -1 - vertical;
+				}
+				idleTimer = 0f;
+				AttemptMove<Wall>((int)horizontal, (int)vertical);
+			}
+			else {
+				idleTimer += Time.deltaTime;
+				if(idleTimer >= idleTime) {
+					animator.SetInteger("facing", 2);
+				}
+				StopMotion();
+			}
 		}
 	}
 
     protected override void AttemptMove<T>(int xDir, int yDir) {
         base.AttemptMove<T>(xDir, yDir);
-        checkIfGameOver();
+        //checkIfGameOver();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -153,10 +155,12 @@ public class Player : MovingObject {
 
     private void checkIfGameOver() {
         if (!GetComponent<Health>().IsAlive()) {
+			animator.SetTrigger("playerDeath");
             GameManager.instance.GameOver();
 			GameManager.level = 1;
 			BoardCreator.level = 1;
-            enabled = false;
+			Camera.main.GetComponent<LoadingScreen>().loading = true;
+			gameEnding = true;
         }
     }
 
