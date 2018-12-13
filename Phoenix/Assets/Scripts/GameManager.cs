@@ -8,10 +8,12 @@ public class GameManager : MonoBehaviour {
     public BoardCreator boardScript;
     public int playerFoodPoints = 100;
 
-    public static int level = 1;
+	public static int level = 1;
 
 	// Use this for initialization
 	void Start () {
+		level = PlayerPrefs.GetInt("Level");
+
         if (instance == null)
             instance = this;
         else if (instance != this)

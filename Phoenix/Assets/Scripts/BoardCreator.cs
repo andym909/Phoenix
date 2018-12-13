@@ -13,7 +13,7 @@ public class BoardCreator : MonoBehaviour
 
     public int columns = 100;                                 // The number of columns on the board (how wide it will be).
     public int rows = 100;                                    // The number of rows on the board (how tall it will be).
-    private IntRange numRooms = new IntRange(4+level, 5+level);         // The range of the number of rooms there can be.
+	private IntRange numRooms; 						         // The range of the number of rooms there can be.
     public IntRange roomWidth = new IntRange(3, 10);         // The range of widths rooms can have.
     public IntRange roomHeight = new IntRange(3, 10);        // The range of heights rooms can have.
     public IntRange corridorLength = new IntRange(6, 10);    // The range of lengths corridors between rooms can have.
@@ -30,7 +30,7 @@ public class BoardCreator : MonoBehaviour
 	public GameObject dmgOrb;
 	public GameObject healthOrb;
 	public GameObject speedOrb;
-    public static int level = 1;
+	public static int level;
 
     private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
     private Room[] rooms;                                     // All the rooms that are created for this board.
@@ -38,9 +38,10 @@ public class BoardCreator : MonoBehaviour
     private GameObject boardHolder;                           // GameObject that acts as a container for all other tiles.
 
 
-    private void Start()
+    private void Awake()
     {
-        //SetupScene();
+		level = PlayerPrefs.GetInt("Level");
+		numRooms = new IntRange(4 + level, 5 + level);
     }
 
     public void SetupScene()

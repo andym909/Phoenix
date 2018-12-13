@@ -107,6 +107,7 @@ public class Player : MovingObject {
 			Camera.main.GetComponent<LoadingScreen>().LoadScreen();
 			GetComponent<Health>().SetCanBeDamaged(false);
             GameManager.level++;
+			PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
             Invoke("Restart", restartLevelDelay);
             enabled = false;
         }
@@ -153,6 +154,8 @@ public class Player : MovingObject {
     private void checkIfGameOver() {
         if (!GetComponent<Health>().IsAlive()) {
             GameManager.instance.GameOver();
+			GameManager.level = 1;
+			BoardCreator.level = 1;
             enabled = false;
         }
     }
@@ -174,9 +177,6 @@ public class Player : MovingObject {
 		PlayerPrefs.SetInt("MaxHealth", hd.maxHealth);
 		PlayerPrefs.SetInt("Health", hd.curHealth);
 		PlayerPrefs.SetInt("Feathers", feathers);
-		print("MaxHealth: " + PlayerPrefs.GetInt("MaxHealth"));
-		print("Health: " + PlayerPrefs.GetInt("Health"));
-		print("Feathers: " + PlayerPrefs.GetInt("Feathers"));
 	}
 
 	public int GetFacing() {

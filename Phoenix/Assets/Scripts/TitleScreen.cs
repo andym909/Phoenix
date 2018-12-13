@@ -15,8 +15,9 @@ public class TitleScreen : MonoBehaviour {
 		PlayerPrefs.SetInt("Feathers", 0);
 		PlayerPrefs.SetInt("Start", PlayerPrefs.GetInt("Start") == -1 ? 2 : 1);
 		PlayerPrefs.SetInt("Speed", 4);
-		PlayerPrefs.SetInt("MeleeDmg", 2);
-		PlayerPrefs.SetInt("RangeDmg", 3);
+		PlayerPrefs.SetInt("MeleeDmg", 4);
+		PlayerPrefs.SetInt("RangeDmg", 2);
+		PlayerPrefs.SetInt("Level", 1);
 
 		tutorialImage = GameObject.Find("TutorialImage").GetComponent<Image>();
 	}
