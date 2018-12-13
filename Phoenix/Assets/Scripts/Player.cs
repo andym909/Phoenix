@@ -100,48 +100,47 @@ public class Player : MovingObject {
 
     protected override void AttemptMove<T>(int xDir, int yDir) {
         base.AttemptMove<T>(xDir, yDir);
-        //checkIfGameOver();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Exit" && hasKey == true) {
-			SavePrefs();
-			Camera.main.GetComponent<LoadingScreen>().LoadScreen();
+        if (other.tag == "Exit" && hasKey == true) {                // If the player has the key and collides with the exit
+			SavePrefs();                                            // save the stats, go to the loading screen, and 
+			Camera.main.GetComponent<LoadingScreen>().LoadScreen(); // increase the level
 			GetComponent<Health>().SetCanBeDamaged(false);
             GameManager.level++;
 			PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
             Invoke("Restart", restartLevelDelay);
             enabled = false;
         }
-        else if (other.tag == "Feather") {
-			changeFeathers(1);
+        else if (other.tag == "Feather") { // If the player collides with a feather, increase the feather count
+			changeFeathers(1);             // and disable the feather object
             other.gameObject.SetActive(false);
         }
         else if(other.tag == "Key")
         {
-			key.color = Color.white;
-            hasKey = true;
-            other.gameObject.SetActive(false);
+			key.color = Color.white;            // If the player colides with the key, set the HUD to display the key
+            hasKey = true;                      // Allow the player to exit the level, play the open door animation
+            other.gameObject.SetActive(false);  // and disable the key object
 			GameObject.FindGameObjectWithTag("Exit").GetComponent<Animator>().SetTrigger("OpenDoor");
         }
         else if(other.tag == "Speed_PowerUp" && this.moveTime <= 18f)
         {
-            this.moveTime++;
-			PlayerPrefs.SetInt("Speed", moveTime);
-            other.gameObject.SetActive(false);
+            this.moveTime++;                        // If the player collides with the speed power up, increase the move
+			PlayerPrefs.SetInt("Speed", moveTime);  // time to speed the player up, save the speed in Player Prefs, and 
+            other.gameObject.SetActive(false);      // disable the orb
         }
-        else if (other.tag == "Damage_PowerUp")
+        else if (other.tag == "Damage_PowerUp") // If the player collides with the damage power up
         {
             CloseHelper closeHelp = GetComponent<PlayerAttackClose>().invisibleProjectile.GetComponent<CloseHelper>();
-            closeHelp.increaseDamage(1);
+            closeHelp.increaseDamage(1); // Increase the damage of the close attack
             Helper rangeHelp = GetComponent<PlayerAttackDistance>().projectile.GetComponent<Helper>();
-            rangeHelp.increaseDamage(1);
-            other.gameObject.SetActive(false);
+            rangeHelp.increaseDamage(1); // Increase the damage of the ranged attack
+            other.gameObject.SetActive(false); // Disable the orb
         }
         else if (other.tag == "Health_PowerUp")
         {
-			hd.IncreaseMax(2);
-            other.gameObject.SetActive(false);
+			hd.IncreaseMax(2);                 // If the player collides with the health power up, increase the health
+            other.gameObject.SetActive(false); // by two and disable the orb
         }
     }
 
