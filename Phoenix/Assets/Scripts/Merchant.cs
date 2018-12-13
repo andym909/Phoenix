@@ -62,4 +62,9 @@ public class Merchant : MonoBehaviour {
 			exchange.enabled = true;
 		}
 	}
+
+	// Distance getter
+	public float GetDistance() {
+		return distance;
+	}
 }
