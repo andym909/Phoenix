@@ -37,7 +37,7 @@ public class ChaseAttack : MovingObject {
 
 		// Handles all movement, agro-ing, and animation of this enemy
 		if(canSee && player != null) {
-			GetComponent<EnemyVision>().agro = true;
+			GetComponent<EnemyVision>().changeAgro(true);
 			ghostPlayer = player.transform.position;
 			if(Vector2.Distance(transform.position, player.transform.position) <= minDistance && timer >= attackTimer) {
 				anim.SetTrigger("attack");

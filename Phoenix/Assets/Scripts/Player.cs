@@ -185,8 +185,8 @@ public class Player : MovingObject {
 
     // save the player's stats
 	void SavePrefs() {
-		PlayerPrefs.SetInt("MaxHealth", hd.maxHealth);
-		PlayerPrefs.SetInt("Health", hd.curHealth);
+		PlayerPrefs.SetInt("MaxHealth", hd.GetMaxHealth());
+		PlayerPrefs.SetInt("Health", hd.GetCurHealth());
 		PlayerPrefs.SetInt("Feathers", feathers);
 	}
 
