@@ -47,7 +47,7 @@ public class Player : MovingObject {
 			float vertical = 0;
 
             // set variables if everything is done loading
-			if(Camera.main != null && Camera.main.GetComponent<LoadingScreen>().loading == false) {
+			if(Camera.main != null && Camera.main.GetComponent<LoadingScreen>().GetLoading() == false) {
 				horizontal = Input.GetAxisRaw("Horizontal");
 				vertical = Input.GetAxisRaw("Vertical");
 			}
@@ -77,9 +77,9 @@ public class Player : MovingObject {
 			}
 
 
-			if(horizontal != 0 || vertical != 0) {
-				if(horizontal != 0 && horizontal > 0) {
-					horizontal += 1 - horizontal;
+			if(horizontal != 0 || vertical != 0) {         // Adjusting the input to allow for the controller support
+				if(horizontal != 0 && horizontal > 0) {    // to make sure that the program does not ignore an input
+					horizontal += 1 - horizontal;          // between zero and one
 				}
 				else if(horizontal != 0 && horizontal < 0) {
 					horizontal += -1 - horizontal;
@@ -95,8 +95,8 @@ public class Player : MovingObject {
 			}
 			else {
 				idleTimer += Time.deltaTime;
-				if(idleTimer >= idleTime) {
-					animator.SetInteger("facing", 2);
+				if(idleTimer >= idleTime) {                // Setting the player's animation to the forward idle animation  
+					animator.SetInteger("facing", 2);      // if no direction has been pressed within the idleTimer time
 				}
 				StopMotion();
 			}
@@ -165,7 +165,7 @@ public class Player : MovingObject {
             GameManager.instance.GameOver();
 			GameManager.level = 1;
 			BoardCreator.level = 1;
-			Camera.main.GetComponent<LoadingScreen>().loading = true;
+			Camera.main.GetComponent<LoadingScreen>().SetLoading(true);
 			gameEnding = true;
         }
     }

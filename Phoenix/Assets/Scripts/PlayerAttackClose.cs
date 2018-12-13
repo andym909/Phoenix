@@ -23,7 +23,7 @@ public class PlayerAttackClose : MonoBehaviour {
 	}
 
 	void Update () {
-		if(Camera.main.GetComponent<LoadingScreen>().loading == false && cooldownTimer >= getCooldown() && Input.GetButtonDown("Jump")) {
+		if(Camera.main.GetComponent<LoadingScreen>().GetLoading() == false && cooldownTimer >= getCooldown() && Input.GetButtonDown("Jump")) {
 			// get the direction we're going
 			// -1 idle, 0 up, 1 right, 2 down, 3 left
 			int direction = this.GetComponent<Animator>().GetInteger("facing");

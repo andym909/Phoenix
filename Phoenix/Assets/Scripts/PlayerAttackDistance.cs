@@ -24,7 +24,7 @@ public class PlayerAttackDistance : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Camera.main.GetComponent<LoadingScreen>().loading == false && cooldownTimer >= getCooldown() && Input.GetButtonDown("Fire1")) {
+		if(Camera.main.GetComponent<LoadingScreen>().GetLoading() == false && cooldownTimer >= getCooldown() && Input.GetButtonDown("Fire1")) {
 			// get the direction we're going
 			// -1 idle, 0 up, 1 right, 2 down, 3 left
 			int direction = this.GetComponent<Animator>().GetInteger("facing");
