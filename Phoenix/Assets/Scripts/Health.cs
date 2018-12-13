@@ -9,6 +9,7 @@ public class Health : MonoBehaviour {
 	public bool canBeDamaged = true;
 
 	public int startingHealth;
+	public GameObject feather;
 
 	SoundEffects se;
 
@@ -22,8 +23,10 @@ public class Health : MonoBehaviour {
 
 	void Update () {
 		if(!IsAlive()) {
-			if(this.gameObject.tag != "Player")
+			if(this.gameObject.tag != "Player") {
+				Instantiate(feather, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0), Quaternion.identity);
 				Destroy(gameObject);
+			}
 			else
 				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 			enabled = false;
