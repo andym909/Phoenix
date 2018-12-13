@@ -27,8 +27,6 @@ public class Health : MonoBehaviour {
 				Instantiate(feather, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0), Quaternion.identity);
 				Destroy(gameObject);
 			}
-			else
-				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 			enabled = false;
 		}
 	}

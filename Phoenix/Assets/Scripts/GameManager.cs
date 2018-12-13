@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -21,7 +22,11 @@ public class GameManager : MonoBehaviour {
 
         //DontDestroyOnLoad(gameObject);
         boardScript = GetComponent<BoardCreator>();
-        InitGame();
+		InitGame();
+	}
+
+	void Update() {
+		
 	}
 
     public void InitGame() {
@@ -33,7 +38,7 @@ public class GameManager : MonoBehaviour {
 
     public void GameOver() {
         GameManager.level = 1;
-        Invoke("Restart", 1f);
+        Invoke("Restart", 3.5f);
         enabled = false;
     }
 
@@ -48,11 +53,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Restart() {
-        Application.LoadLevel(Application.loadedLevel);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);	
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

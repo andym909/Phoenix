@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 361b6ef79eaf3774190bf2b23883236b
+=======
+guid: 41af79cd400a0a1489202ec8c208cba7
+>>>>>>> master
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -12,7 +16,11 @@ TrueTypeFontImporter:
   fontNames:
   - Celestia Antiqua Std
   fallbackFontReferences:
+<<<<<<< HEAD
   - {fileID: 12800000, guid: 0551ec865d079884fbf997db9bac75d1, type: 3}
+=======
+  - {fileID: 12800000, guid: 0ec29f02f0e528d4dbce5fc9b6e32729, type: 3}
+>>>>>>> master
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
