@@ -1,32 +1,36 @@
-﻿using System.Collections;
+﻿/*
+ * This file controls the behavior of the player's melee attack
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttackClose : MonoBehaviour {
 
-    public float attDistance = 2.0f;
+    private float attDistance = 2.0f;
     public GameObject invisibleProjectile;
 
 	SoundEffects se;
 	MeleeEffects me;
 
-	public float cooldown = 0.75f;
+	private float cooldown = 0.75f;
 	float cooldownTimer;
 
 	void Start() {
 		se = Camera.main.GetComponent<SoundEffects>();
 		me = GetComponentInChildren<MeleeEffects>();
-		cooldownTimer = cooldown;
+		cooldownTimer = getCooldown();
 	}
 
 	void Update () {
-		if(Camera.main.GetComponent<LoadingScreen>().loading == false && cooldownTimer >= cooldown && Input.GetButtonDown("Jump")) {
+		if(Camera.main.GetComponent<LoadingScreen>().loading == false && cooldownTimer >= getCooldown() && Input.GetButtonDown("Jump")) {
 			// get the direction we're going
 			// -1 idle, 0 up, 1 right, 2 down, 3 left
 			int direction = this.GetComponent<Animator>().GetInteger("facing");
+            // make a new projectile 
 			GameObject tmp = (GameObject)Instantiate(invisibleProjectile, transform.position, Quaternion.identity);
-			tmp.GetComponent<CloseHelper>().SetTarget(getTarget(direction));
-			GetComponent<Player>().ResetIdleTimer();
+			tmp.GetComponent<CloseHelper>().SetTarget(getTarget(direction));    // set the projectile's target
+			GetComponent<Player>().ResetIdleTimer();  
 			se.PlayPlayerMelee();
 			me.MeleeAttackAnim();
 			cooldownTimer = 0f;
@@ -36,26 +40,35 @@ public class PlayerAttackClose : MonoBehaviour {
 		}
 	}
 
+    // determine where the target is depending on where the player is facing
     Vector3 getTarget(int dir) {
         Vector3 ret = this.transform.position;
         switch (dir) {
             case -1:
             case 2:
-                ret.y -= attDistance;
+                ret.y -= getDistance();
                 break;
             case 0:
-                ret.y += attDistance;
+                ret.y += getDistance();
                 break;
             case 1:
-                ret.x += attDistance;
+                ret.x += getDistance();
                 break;
             case 3:
-                ret.x -= attDistance;
+                ret.x -= getDistance();
                 break;
             default:
                 print("Problem with the movement state machine");
                 break;
         }
         return ret;
+    }
+
+    public float getDistance() {
+        return attDistance;
+    }
+
+    public float getCooldown() {
+        return cooldown;
     }
 }
