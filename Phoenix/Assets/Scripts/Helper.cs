@@ -9,8 +9,8 @@ using UnityEngine;
 public class Helper : MonoBehaviour {
 
     private Vector3 target;
+    static float speed = 8f;
     private static int damage;
-    float speed = 8f;
 
     // get the damage value from playerprefs
 	void Start() {
@@ -44,6 +44,10 @@ public class Helper : MonoBehaviour {
     {
         return damage;
     }
+
+	public static void IncreaseSpeed(int playerSpeed) {
+		speed = 8 + (playerSpeed - 4);
+	}
 
     private void OnCollisionEnter2D(Collision2D obj) {
         // if it hits an enemy, damage the enemy

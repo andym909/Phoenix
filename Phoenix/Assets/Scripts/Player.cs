@@ -128,6 +128,7 @@ public class Player : MovingObject {
             this.moveTime++;                        // If the player collides with the speed power up, increase the move
 			PlayerPrefs.SetInt("Speed", moveTime);  // time to speed the player up, save the speed in Player Prefs, and 
             other.gameObject.SetActive(false);      // disable the orb
+			Helper.IncreaseSpeed(this.moveTime);
         }
         else if (other.tag == "Damage_PowerUp") // If the player collides with the damage power up
         {
