@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-
+/*
+ *  BoardCreator: A script used to create each procedurally generated level
+ */
 public class BoardCreator : MonoBehaviour
 {
     // The type of tile that will be laid in a specific position.
@@ -10,28 +12,30 @@ public class BoardCreator : MonoBehaviour
         Wall, Floor,
     }
 
+    // Note: These are public so that they are editable in Unity's inspector which allows the prefabs to be 
+    //       set as the GameObjects and the ranges can be edited quickly. 
 
     public int columns = 100;                                 // The number of columns on the board (how wide it will be).
     public int rows = 100;                                    // The number of rows on the board (how tall it will be).
-	private IntRange numRooms; 						         // The range of the number of rooms there can be.
-    public IntRange roomWidth = new IntRange(3, 10);         // The range of widths rooms can have.
-    public IntRange roomHeight = new IntRange(3, 10);        // The range of heights rooms can have.
-    public IntRange corridorLength = new IntRange(6, 10);    // The range of lengths corridors between rooms can have.
+    public IntRange roomWidth = new IntRange(3, 10);          // The range of widths rooms can have.
+    public IntRange roomHeight = new IntRange(3, 10);         // The range of heights rooms can have.
+    public IntRange corridorLength = new IntRange(6, 10);     // The range of lengths corridors between rooms can have.
     public GameObject[] floorTiles;                           // An array of floor tile prefabs.
     public GameObject[] wallTiles;                            // An array of wall tile prefabs.
     public GameObject[] outerWallTiles;                       // An array of outer wall tile prefabs.
-    public GameObject player;
-    public GameObject exit;
-    public GameObject key;
-	public GameObject enemy1;
-	public GameObject enemy2;
-    public GameObject feather;
-	public GameObject merchant;
-	public GameObject dmgOrb;
-	public GameObject healthOrb;
-	public GameObject speedOrb;
-	public static int level;
+    public GameObject player;                                 // The player prefab
+    public GameObject exit;                                   // The exit prefab
+    public GameObject key;                                    // The key prefab
+	public GameObject enemy1;                                 // The prefab for the first type of enemy
+	public GameObject enemy2;                                 // The prefab for the second type of enemy
+    public GameObject feather;                                // The Phoenix Feather prefab
+	public GameObject merchant;                               // The Merchant prefab
+	public GameObject dmgOrb;                                 // The damage powerup prefab
+	public GameObject healthOrb;                              // The health powerup prefab
+	public GameObject speedOrb;                               // The speed powerup prefab
+	public static int level;                                  // Integer that tracks the level
 
+    private IntRange numRooms; 						          // The range of the number of rooms there can be.
     private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
     private Room[] rooms;                                     // All the rooms that are created for this board.
     private Corridor[] corridors;                             // All the corridors that connect the rooms.
@@ -40,8 +44,8 @@ public class BoardCreator : MonoBehaviour
 
     private void Awake()
     {
-		level = PlayerPrefs.GetInt("Level");
-		numRooms = new IntRange(4 + level, 5 + level);
+		level = PlayerPrefs.GetInt("Level");                  // Setting the level to the level saved in PlayerPrefs
+		numRooms = new IntRange(4 + level, 5 + level);        // Setting the range of rooms based on the level
     }
 
     public void SetupScene()
@@ -49,14 +53,19 @@ public class BoardCreator : MonoBehaviour
         // Create the board holder.
         boardHolder = new GameObject("BoardHolder");
 
+        //Set up the array of tiles
         SetupTilesArray();
 
+        //Create the chain of rooms and corridors
         CreateRoomsAndCorridors();
 
+        //Save the position of the rooms and corridors
         SetTilesValuesForRooms();
         SetTilesValuesForCorridors();
 
+        //Add the player, key, exit, merchant, enemies, feathers, and orbs
         InstantiateTiles();
+        //Set the outer walls to create the border
         InstantiateOuterWalls();
 
 		Camera.main.GetComponent<LoadingScreen>().FinishLoad();
@@ -121,6 +130,7 @@ public class BoardCreator : MonoBehaviour
                 corridors[i].SetupCorridor(rooms[i], corridorLength, roomWidth, roomHeight, columns, rows, false);
             }
 
+            //Instantiate the merchant and player in the same room
 			if (i == rooms.Length *.5f || i == rooms.Length * .5f - .5f)
             {
 				playerPos.x = rooms[i].randomX();
@@ -137,6 +147,7 @@ public class BoardCreator : MonoBehaviour
 				Instantiate(merchant, merchantPos, Quaternion.identity);
             }
 
+            //Instantiate the exit
             if (i == rooms.Length - 1)
             {
 				exitPos.x = rooms[i].randomX();
@@ -146,6 +157,7 @@ public class BoardCreator : MonoBehaviour
             }
 
 			float r = Random.value;
+            //There's a 75 percent chance of instantiating an enemy in the room
 			if(rooms[i].getItems() < 1 && r < 0.75) {
 				if(Random.value < 0.5) {
 					Instantiate(enemy1, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
@@ -154,11 +166,14 @@ public class BoardCreator : MonoBehaviour
 					Instantiate(enemy2, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
 				}
 			}
-			else if(rooms[i].getItems() < 1 && r < 0.9) {
+            //There's a 15 percent chance of instantiating a feather in the room
+            else if (rooms[i].getItems() < 1 && r < 0.9) {
 				Instantiate(feather, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
 			}
-			else if(rooms[i].getItems() < 1) {
+            //There's a 10 percent chance of instantiating an orb in the room
+            else if (rooms[i].getItems() < 1) {
 				r = Random.value;
+                //Each type of orb has a 33 percent chance of being the orb that is instantiated
 				GameObject insert = r < 0.333 ? dmgOrb : (r < 0.667 ? healthOrb : speedOrb);
 				Instantiate(insert, new Vector3(rooms[i].randomX(), rooms[i].randomY(), 0), Quaternion.identity);
 			}
