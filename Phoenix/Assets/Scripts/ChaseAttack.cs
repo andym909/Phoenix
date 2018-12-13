@@ -6,7 +6,7 @@ public class ChaseAttack : MovingObject {
 
     GameObject player;
     private float speed = 2f;
-    private float minDistance = 1f;
+    private float minDistance = 0.75f;
     private float range;
     private static int damage = 1;
 
