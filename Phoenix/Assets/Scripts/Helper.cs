@@ -6,7 +6,7 @@ public class Helper : MonoBehaviour {
 
     private Vector3 target;
     private static int damage = 1;
-    float speed = 8f;
+    static float speed = 8f;
 
 	void Start() {
 		damage = PlayerPrefs.GetInt("RangeDmg");
@@ -50,6 +50,10 @@ public class Helper : MonoBehaviour {
     {
         return damage;
     }
+
+	public static void IncreaseSpeed(int playerSpeed) {
+		speed = 8 + (playerSpeed - 4);
+	}
 
     private void OnCollisionEnter2D(Collision2D obj) {
 		if(obj.gameObject.tag.Equals("Enemy")) {
