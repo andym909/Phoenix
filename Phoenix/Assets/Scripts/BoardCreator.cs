@@ -139,7 +139,7 @@ public class BoardCreator : MonoBehaviour
                 Instantiate(player, playerPos, Quaternion.identity);
 
 				merchantPos = playerPos;
-				while(Vector3.Distance(playerPos, merchantPos) < merchant.GetComponent<Merchant>().distance) {
+				while(Vector3.Distance(playerPos, merchantPos) < merchant.GetComponent<Merchant>().GetDistance()) {
 					merchantPos.x = rooms[i].randomX();
 					merchantPos.y = rooms[i].randomY() + 0.15f;
 				}
