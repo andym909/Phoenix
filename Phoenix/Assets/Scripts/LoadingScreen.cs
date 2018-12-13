@@ -3,17 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * 	This scripts handles the logic behind our loading screen, and starts the loading process
+ * 
+ */ 
+
 public class LoadingScreen : MonoBehaviour {
 
-	public Image load;
-	GameObject canvas;
-	SoundEffects se;
+	public Image load;	// Reference to the load screen picture
+	GameObject canvas;	// Reference to the UI Canvas
+	SoundEffects se;	// Reference to the SoundEffects script
 
-	public bool loading = true;
-	float paddingTime = 1f;
-	float paddingTimer = 0f;
-	bool endingLoad = false;
+	bool loading = true;		// Boolean describing if loading is occurring
+	float paddingTime = 1f;		// Padding time to let the game completely load before the player can move
+	float paddingTimer = 0f;	// Timer for the above
+	bool endingLoad = false;	// Boolean to start that timer
 
+	// loading setter and getter
+	public void SetLoading(bool b) {
+		loading = b;
+	} 
+	public bool GetLoading() {
+		return loading;
+	}
+
+	// Set SoundEffects reference and play starting sounds
 	void Start() {
 		se = Camera.main.GetComponent<SoundEffects>();
 		canvas = GameObject.Find("Canvas");
@@ -32,6 +46,7 @@ public class LoadingScreen : MonoBehaviour {
 		}
 	}
 
+	// Remove HUD elements and pull up the loading screen
 	public void LoadScreen() {
 		Image[] images = canvas.GetComponentsInChildren<Image>();
 		for(int i = 0; i < images.Length; i++) {
@@ -47,6 +62,7 @@ public class LoadingScreen : MonoBehaviour {
 		loading = true;
 	}
 
+	// Move through the padding timer
 	void Update() {
 		if(endingLoad) {
 			if(paddingTimer < paddingTime) {
@@ -59,10 +75,12 @@ public class LoadingScreen : MonoBehaviour {
 		}
 	}
 
+	// Start the padding timer
 	public void FinishLoad() {
 		endingLoad = true;
 	}
 
+	// Pull the HUD back up and remove the loading screen
 	void EndLoad() {
 		if(canvas == null) {
 			canvas = GameObject.Find("Canvas");

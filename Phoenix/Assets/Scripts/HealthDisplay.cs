@@ -5,19 +5,35 @@ using UnityEngine.UI;
 
 public class HealthDisplay : MonoBehaviour {
 
-	Health playerHealth;
-	Image[] fires;
-	public int curHealth;
-	public int maxHealth;
+	Health playerHealth;		// Reference to Player's Health instance
+	Image[] fires;				// Array of the images that make up the Health HUD
+	int curHealth;				// player's current health
+	int maxHealth;				// player's maximum health
+		
+	// Need to be public to be set in-editor
+	public Sprite fullFire;		// The full fire image
+	public Sprite halfFire;		// the half a fire image
+	public Sprite emptyFire;	// the outline of a fire image
+	public Image fireHealth;	// An image prefab that has needed properties
+	Canvas canvas;				// A reference to the UI canvas
 
-	public Sprite fullFire;
-	public Sprite halfFire;
-	public Sprite emptyFire;
+	// curHealth setter and getter
+	public void SetCurHealth(int h) {
+		curHealth = h;
+	}
+	public int GetCurHealth() {
+		return curHealth;
+	}
 
-	public Image fireHealth;
-	Canvas canvas;
+	// maxHealth setter and getter
+	public void SetMaxHealth(int h) {
+		maxHealth = h;
+	}
+	public int GetMaxHealth() {
+		return maxHealth;
+	}
 
-	// Use this for initialization
+	// Set references and get health from previous scenes
 	void Start () {
 		canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
 		GameObject p = GameObject.FindGameObjectWithTag("Player");
@@ -27,13 +43,9 @@ public class HealthDisplay : MonoBehaviour {
 			InitializeHealth();
 		}
 	}
+		
 
-    public void increaseMaxHealth(int increm)
-    {
-        maxHealth += increm;
-		InitializeHealth();
-    }
-
+	// Checks if health has been changed every frame
 	void Update () {
 		if(playerHealth != null) {
 			int newHealth = playerHealth.GetHealth();
@@ -52,6 +64,7 @@ public class HealthDisplay : MonoBehaviour {
 		}
 	}
 
+	// Update the visuals of health
 	void UpdateHealth() {
 		int healthCounter = 0;
 		int difference;
@@ -71,6 +84,7 @@ public class HealthDisplay : MonoBehaviour {
 		}
 	}
 
+	// Create the fire image array
 	void InitializeHealth() {
 		fires = new Image[maxHealth / 2];
 
@@ -85,6 +99,7 @@ public class HealthDisplay : MonoBehaviour {
 		UpdateHealth();
 	}
 
+	// Increase max health
 	public void IncreaseMax(int amount) {
 		maxHealth += amount;
 		fires = new Image[fires.Length + (amount / 2)];
