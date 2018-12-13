@@ -21,6 +21,7 @@ public class Player : MovingObject {
 
 	// Use this for initialization
 	protected override void Start () {
+        // set up the heads up display
 		hd = GameObject.Find("GameManager(Clone)").GetComponent<HealthDisplay>();
 
 		featherText = GameObject.Find("Feather_Text").GetComponent<Text>();
@@ -29,11 +30,12 @@ public class Player : MovingObject {
 		key = GameObject.Find("HUD_Key").GetComponent<Image>();
 		key.color = Color.black;
 
+        // turn damage on
 		GetComponent<Health>().SetCanBeDamaged(true);
 
         animator = GetComponent<Animator>();
 
-        base.Start();
+        base.Start();   // start MovingObject
 	}
 
     // Update is called once per frame
@@ -44,33 +46,36 @@ public class Player : MovingObject {
 			float horizontal = 0;
 			float vertical = 0;
 
+            // set variables if everything is done loading
 			if(Camera.main != null && Camera.main.GetComponent<LoadingScreen>().loading == false) {
 				horizontal = Input.GetAxisRaw("Horizontal");
 				vertical = Input.GetAxisRaw("Vertical");
 			}
 
+            // if horizontal in non-zero, move horizontally
 			if(horizontal != 0) {
 				animator.SetBool("movement", true);
 				vertical = 0;
 
 				if(horizontal > 0) {
-					animator.SetInteger("facing", 1);
+					animator.SetInteger("facing", 1);   // facing right
 				}
 				else {
-					animator.SetInteger("facing", 3);
+					animator.SetInteger("facing", 3);   // facing left
 				}
 			}
-			else if(vertical > 0) {
-				animator.SetBool("movement", true);
-				animator.SetInteger("facing", 0);
+			else if(vertical > 0) {                     // moving vertically
+				animator.SetBool("movement", true); 
+				animator.SetInteger("facing", 0);       // facing up    
 			}
 			else if(vertical < 0) {
 				animator.SetBool("movement", true);
-				animator.SetInteger("facing", 2);
+				animator.SetInteger("facing", 2);       // facing down
 			}
 			else {
-				animator.SetBool("movement", false);
+				animator.SetBool("movement", false);    // not moving
 			}
+
 
 			if(horizontal != 0 || vertical != 0) {
 				if(horizontal != 0 && horizontal > 0) {
@@ -154,6 +159,7 @@ public class Player : MovingObject {
     }
 
     private void checkIfGameOver() {
+        // if we run out of health, kill the player and reset the game
         if (!GetComponent<Health>().IsAlive()) {
 			animator.SetTrigger("playerDeath");
             GameManager.instance.GameOver();
@@ -177,6 +183,7 @@ public class Player : MovingObject {
 		featherText.text = "x" + feathers.ToString();
 	}
 
+    // save the player's stats
 	void SavePrefs() {
 		PlayerPrefs.SetInt("MaxHealth", hd.maxHealth);
 		PlayerPrefs.SetInt("Health", hd.curHealth);
