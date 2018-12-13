@@ -1,45 +1,39 @@
-﻿using System.Collections;
+﻿/*
+ * This file controls the projectile fired by the player's distance attack
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Helper : MonoBehaviour {
 
     private Vector3 target;
-    private static int damage = 1;
     static float speed = 8f;
+    private static int damage;
 
+    // get the damage value from playerprefs
 	void Start() {
 		damage = PlayerPrefs.GetInt("RangeDmg");
 	}
 
+    // set the target for the projectile
     public void SetTarget(Vector3 t) {
-        // make sure x direction is within the board
-        if (t.x < 0)
-            target.x = 0;
-        else if (t.x > GameManager.instance.boardScript.columns)
-            target.x = GameManager.instance.boardScript.columns;
-        else
-            target.x = t.x;
-
-        // make sure y direction is within the board
-        if (t.y < 0)
-            target.y = 0;
-        else if (t.y > GameManager.instance.boardScript.rows)
-            target.y = GameManager.instance.boardScript.rows;
-        else
-            target.y = t.y;
-
+        target.x = t.x;
+        target.y = t.y;
         // z is always 0;
         target.z = t.z;
     }
 	
-	// Update is called once per frame
 	void Update () {
+        // move toward the target with each frame
+        // if it gets to the target, destroy it
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         if (transform.position == target)
             Destroy(gameObject);
 	}
 
+    // increase the damage done by the projectile
     public void increaseDamage(int increm)
     {
         damage += increm;
@@ -56,9 +50,11 @@ public class Helper : MonoBehaviour {
 	}
 
     private void OnCollisionEnter2D(Collision2D obj) {
+        // if it hits an enemy, damage the enemy
 		if(obj.gameObject.tag.Equals("Enemy")) {
 			obj.gameObject.GetComponent<Health>().LoseHealth(damage);
 		}
+        // if it hits anything besides the player, destroy it
 		if(!obj.gameObject.tag.Equals("Player")) {
 			Destroy(gameObject);
 		}
