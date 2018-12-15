@@ -9,11 +9,12 @@ using UnityEngine;
 public class Helper : MonoBehaviour {
 
     private Vector3 target;
-    static float speed = 8f;
+    static float speed;
     private static int damage;
 
     // get the damage value from playerprefs
 	void Start() {
+		IncreaseSpeed(PlayerPrefs.GetInt("Speed"));
 		damage = PlayerPrefs.GetInt("RangeDmg");
 	}
 
